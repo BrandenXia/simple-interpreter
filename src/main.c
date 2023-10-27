@@ -1,5 +1,5 @@
 #include "lexer.h"
-#include "token_utils.h"
+#include "utils/token_utils.h"
 
 int main() {
     char *str = "ab == 1 + 28  * 3;";

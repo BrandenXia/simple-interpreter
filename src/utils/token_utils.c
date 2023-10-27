@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "token.h"
-#include "token_utils.h"
-#include "char_utils.h"
+#include "utils/token_utils.h"
+#include "utils/char_utils.h"
 
 bool isOperator(char *c) {
     for (int i = 0; OPERATORS[i][0] != '\0'; i++) {
