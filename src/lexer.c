@@ -20,19 +20,20 @@ TokenList *tokenize(char *input) {
     while (current <= strlen(input)) {
         TokenType type;
         char *c;
+        char *tmp;
 
         c = malloc(sizeof(char));
         *c = input[current];
         type = getType(c);
 
         if (type == token->type) {
-            char *tmp;
             tmp = realloc(token->value, sizeof(token->value) + sizeof(char));
-            strncat(tmp, c, 1);
             if (tmp == NULL) {
                 exit(1);
             }
+            tmp = strcat(tmp, c);
             token->value = tmp;
+            free(c);
         } else {
             if (token->type == BLANK) {
                 free(token->value);
