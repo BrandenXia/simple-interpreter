@@ -38,6 +38,8 @@ TokenList *tokenize(char *input) {
         token->value = malloc(sizeof(tmp) - sizeof(char));
         strncpy(token->value, tmp, strlen(tmp) - 1);
         addToken(tokens, *token);
+        free(tmp);
+        free(token);
     }
 
     return tokens;
