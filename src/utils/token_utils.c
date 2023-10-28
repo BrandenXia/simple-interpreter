@@ -15,20 +15,24 @@ bool isOperator(const char *c) {
     return false;
 }
 
-bool isRightParen(char c) {
-    return inArrayChar(R_PARENS, c);
+bool isRightParen(const char *c) {
+    if (strlen(c) != 1) return false;
+    return inArrayChar(R_PARENS, *c);
 }
 
-bool isLeftParen(char c) {
-    return inArrayChar(L_PARENS, c);
+bool isLeftParen(const char *c) {
+    if (strlen(c) != 1) return false;
+    return inArrayChar(L_PARENS, *c);
 }
 
-bool isQuote(char c) {
-    return inArrayChar(QUOTES, c);
+bool isQuote(const char *c) {
+    if (strlen(c) != 1) return false;
+    return inArrayChar(QUOTES, *c);
 }
 
-bool isEnd(char c) {
-    return inArrayChar(ENDS, c);
+bool isEnd(const char *c) {
+    if (strlen(c) != 1) return false;
+    return inArrayChar(ENDS, *c);
 }
 
 bool isObject(const char *c) {
@@ -65,13 +69,13 @@ bool isBlank(const char *c) {
 TokenType getType(const char *c) {
     if (isOperator(c)) {
         return TOKEN_TYPE_OPERATOR;
-    } else if (isRightParen(*c)) {
+    } else if (isRightParen(c)) {
         return TOKEN_TYPE_R_PAREN;
-    } else if (isLeftParen(*c)) {
+    } else if (isLeftParen(c)) {
         return TOKEN_TYPE_L_PAREN;
-    } else if (isQuote(*c)) {
+    } else if (isQuote(c)) {
         return TOKEN_TYPE_STRING;
-    } else if (isEnd(*c)) {
+    } else if (isEnd(c)) {
         return TOKEN_TYPE_END;
     } else if (isObject(c)) {
         return TOKEN_TYPE_OBJECT;

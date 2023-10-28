@@ -5,13 +5,13 @@
 
 bool isOperator(const char *c);
 
-bool isRightParen(char c);
+bool isRightParen(const char *c);
 
-bool isLeftParen(char c);
+bool isLeftParen(const char *c);
 
-bool isQuote(char c);
+bool isQuote(const char *c);
 
-bool isEnd(char c);
+bool isEnd(const char *c);
 
 bool isObject(const char *c);
 
