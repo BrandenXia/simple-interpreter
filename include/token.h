@@ -2,15 +2,15 @@
 #define SIMPLE_INTERPRETER_TOKEN_H
 
 typedef enum {
-    OBJECT,
-    OPERATOR,
-    NUMBER,
-    STRING,
-    L_PAREN,
-    R_PAREN,
-    END,
-    BLANK,
-    UNKNOWN
+    TOKEN_TYPE_OBJECT,
+    TOKEN_TYPE_OPERATOR,
+    TOKEN_TYPE_NUMBER,
+    TOKEN_TYPE_STRING,
+    TOKEN_TYPE_L_PAREN,
+    TOKEN_TYPE_R_PAREN,
+    TOKEN_TYPE_END,
+    TOKEN_TYPE_BLANK,
+    TOKEN_TYPE_UNKNOWN
 } TokenType;
 
 const char *tokenTypeToString(TokenType type);

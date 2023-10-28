@@ -64,23 +64,23 @@ bool isBlank(const char *c) {
 
 TokenType getType(const char *c) {
     if (isOperator(c)) {
-        return OPERATOR;
+        return TOKEN_TYPE_OPERATOR;
     } else if (isRightParen(*c)) {
-        return R_PAREN;
+        return TOKEN_TYPE_R_PAREN;
     } else if (isLeftParen(*c)) {
-        return L_PAREN;
+        return TOKEN_TYPE_L_PAREN;
     } else if (isQuote(*c)) {
-        return STRING;
+        return TOKEN_TYPE_STRING;
     } else if (isEnd(*c)) {
-        return END;
+        return TOKEN_TYPE_END;
     } else if (isObject(c)) {
-        return OBJECT;
+        return TOKEN_TYPE_OBJECT;
     } else if (isNumber(c)) {
-        return NUMBER;
+        return TOKEN_TYPE_NUMBER;
     } else if (isBlank(c)) {
-        return BLANK;
+        return TOKEN_TYPE_BLANK;
     } else {
-        return UNKNOWN;
+        return TOKEN_TYPE_UNKNOWN;
     }
 }
 

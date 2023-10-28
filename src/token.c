@@ -3,23 +3,23 @@
 
 inline const char *tokenTypeToString(TokenType type) {
     switch (type) {
-        case OBJECT:
+        case TOKEN_TYPE_OBJECT:
             return "OBJECT";
-        case OPERATOR:
+        case TOKEN_TYPE_OPERATOR:
             return "OPERATOR";
-        case NUMBER:
+        case TOKEN_TYPE_NUMBER:
             return "NUMBER";
-        case STRING:
+        case TOKEN_TYPE_STRING:
             return "STRING";
-        case L_PAREN:
+        case TOKEN_TYPE_L_PAREN:
             return "L_PAREN";
-        case R_PAREN:
+        case TOKEN_TYPE_R_PAREN:
             return "R_PAREN";
-        case END:
+        case TOKEN_TYPE_END:
             return "END";
-        case BLANK:
+        case TOKEN_TYPE_BLANK:
             return "BLANK";
-        case UNKNOWN:
+        case TOKEN_TYPE_UNKNOWN:
             return "UNKNOWN";
     }
 }
