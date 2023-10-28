@@ -13,41 +13,31 @@ TokenList *tokenize(char *input) {
     tokens->head = NULL;
     tokens->tail = NULL;
     tokens->size = 0;
-    token = malloc(sizeof(Token));
-    token->type = BLANK;
-    token->value = malloc(sizeof(char));
 
     while (current <= strlen(input)) {
         TokenType type;
-        char *c;
-        char *tmp;
+        char* tmp;
 
-        c = malloc(sizeof(char));
-        *c = input[current];
-        type = getType(c);
+        token = malloc(sizeof(Token));
+        tmp = malloc(sizeof(char));
 
-        if (type == token->type) {
-            tmp = realloc(token->value, sizeof(token->value) + sizeof(char));
-            if (tmp == NULL) {
-                exit(1);
-            }
-            tmp = strcat(tmp, c);
-            token->value = tmp;
-            free(c);
-        } else {
-            if (token->type == BLANK) {
-                free(token->value);
-                free(token);
-            } else {
-                addToken(tokens, *token);
-            }
+        strncat(tmp, &input[current], 1);
+        token->type = getType(tmp);
 
-            token = malloc(sizeof(Token));
-            token->type = type;
-            token->value = c;
+        if (token->type == BLANK) {
+            current++;
+            continue;
         }
 
-        current++;
+        do {
+            current++;
+            strncat(tmp, &input[current], 1);
+            type = getType(tmp);
+        } while (type == token->type && current <= strlen(input));
+
+        token->value = malloc(sizeof(tmp) - sizeof(char));
+        strncpy(token->value, tmp, strlen(tmp) - 1);
+        addToken(tokens, *token);
     }
 
     return tokens;
