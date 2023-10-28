@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-bool isOperator(char *c);
+bool isOperator(const char *c);
 
 bool isRightParen(char c);
 
@@ -13,16 +13,16 @@ bool isQuote(char c);
 
 bool isEnd(char c);
 
-bool isObject(char *c);
+bool isObject(const char *c);
 
-bool isNumber(char *c);
+bool isNumber(const char *c);
 
-bool isBlank(char *c);
+bool isBlank(const char *c);
 
-TokenType getType(char *c);
+TokenType getType(const char *c);
 
-void printToken(Token *token);
+void printToken(const Token *token);
 
-void printTokens(TokenList *tokens);
+void printTokens(const TokenList *tokens);
 
 #endif //SIMPLE_INTERPRETER_TOKEN_UTILS_H

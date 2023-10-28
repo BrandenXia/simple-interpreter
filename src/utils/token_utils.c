@@ -6,7 +6,7 @@
 #include "utils/token_utils.h"
 #include "utils/char_utils.h"
 
-bool isOperator(char *c) {
+bool isOperator(const char *c) {
     for (int i = 0; OPERATORS[i][0] != '\0'; i++) {
         if (strcmp(OPERATORS[i], c) == 0 || strcmp(strncpy(malloc(sizeof(char)), OPERATORS[i], 1), c) == 0) {
             return true;
@@ -31,7 +31,7 @@ bool isEnd(char c) {
     return inArrayChar(ENDS, c);
 }
 
-bool isObject(char *c) {
+bool isObject(const char *c) {
     for (int i = 0; i < strlen(c); i++) {
         if (!isAlpha(c[i])) {
             return false;
@@ -41,7 +41,7 @@ bool isObject(char *c) {
     return true;
 }
 
-bool isNumber(char *c) {
+bool isNumber(const char *c) {
     for (int i = 0; i < strlen(c); i++) {
         if (!isDigit(c[i])) {
             return false;
@@ -51,7 +51,7 @@ bool isNumber(char *c) {
     return true;
 }
 
-bool isBlank(char *c) {
+bool isBlank(const char *c) {
     while (*c != '\0') {
         if (!isspace(*c)) {
             return false;
@@ -62,7 +62,7 @@ bool isBlank(char *c) {
     return true;
 }
 
-TokenType getType(char *c) {
+TokenType getType(const char *c) {
     if (isOperator(c)) {
         return OPERATOR;
     } else if (isRightParen(*c)) {
@@ -84,11 +84,11 @@ TokenType getType(char *c) {
     }
 }
 
-void printToken(Token *token) {
+void printToken(const Token *token) {
     printf("Token(%s, \"%s\")\n", tokenTypeToString(token->type), token->value);
 }
 
-void printTokens(TokenList *tokens) {
+void printTokens(const TokenList *tokens) {
     printf("TokenList(%d) [\n", tokens->size);
     for (TokenNode *current = tokens->head; current != NULL; current = current->next) {
         printf("\t");

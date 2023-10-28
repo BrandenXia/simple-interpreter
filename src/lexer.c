@@ -3,7 +3,7 @@
 #include "lexer.h"
 #include "utils/token_utils.h"
 
-TokenList *tokenize(char *input) {
+TokenList *tokenize(const char *input) {
     int current;
     TokenList *tokens;
     Token *token;

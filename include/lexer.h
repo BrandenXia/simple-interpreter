@@ -3,6 +3,6 @@
 
 #include "token.h"
 
-TokenList *tokenize(char *input);
+TokenList *tokenize(const char *input);
 
 #endif //SIMPLE_INTERPRETER_LEXER_H
