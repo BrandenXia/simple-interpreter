@@ -13,8 +13,6 @@ typedef enum {
     TOKEN_TYPE_UNKNOWN
 } TokenType;
 
-const char *tokenTypeToString(TokenType type);
-
 typedef struct {
     TokenType type;
     char *value;

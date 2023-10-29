@@ -6,6 +6,29 @@
 #include "utils/token_utils.h"
 #include "utils/char_utils.h"
 
+inline const char *stringifyTokenType(TokenType type) {
+    switch (type) {
+        case TOKEN_TYPE_OBJECT:
+            return "OBJECT";
+        case TOKEN_TYPE_OPERATOR:
+            return "OPERATOR";
+        case TOKEN_TYPE_NUMBER:
+            return "NUMBER";
+        case TOKEN_TYPE_STRING:
+            return "STRING";
+        case TOKEN_TYPE_L_PAREN:
+            return "L_PAREN";
+        case TOKEN_TYPE_R_PAREN:
+            return "R_PAREN";
+        case TOKEN_TYPE_END:
+            return "END";
+        case TOKEN_TYPE_BLANK:
+            return "BLANK";
+        case TOKEN_TYPE_UNKNOWN:
+            return "UNKNOWN";
+    }
+}
+
 bool isOperator(const char *c) {
     for (int i = 0; OPERATORS[i][0] != '\0'; i++) {
         if (strcmp(OPERATORS[i], c) == 0 || strcmp(strncpy(malloc(sizeof(char)), OPERATORS[i], 1), c) == 0) {
@@ -89,7 +112,7 @@ TokenType getType(const char *c) {
 }
 
 void printToken(const Token *token) {
-    printf("Token(%s, \"%s\")\n", tokenTypeToString(token->type), token->value);
+    printf("Token(%s, \"%s\")\n", stringifyTokenType(token->type), token->value);
 }
 
 void printTokens(const TokenList *tokens) {

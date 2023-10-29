@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 
+const char *stringifyTokenType(TokenType type);
+
 bool isOperator(const char *c);
 
 bool isRightParen(const char *c);
