@@ -31,6 +31,8 @@ typedef struct {
     int size;
 } TokenList;
 
+TokenList *newTokenList();
+
 void addToken(TokenList *list, Token token);
 
 extern const char *OPERATORS[];

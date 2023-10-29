@@ -9,10 +9,7 @@ TokenList *tokenize(const char *input) {
     Token *token;
 
     current = 0;
-    tokens = malloc(sizeof(TokenList));
-    tokens->head = NULL;
-    tokens->tail = NULL;
-    tokens->size = 0;
+    tokens = newTokenList();
 
     while (current <= strlen(input)) {
         TokenType type;
