@@ -1,7 +1,7 @@
 #ifndef SIMPLE_INTERPRETER_LEXER_H
 #define SIMPLE_INTERPRETER_LEXER_H
 
-#include "token.h"
+#include "lexer/token.h"
 
 TokenList *tokenize(const char *input);
 

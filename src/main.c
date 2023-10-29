@@ -1,4 +1,4 @@
-#include "lexer.h"
+#include "lexer/lexer.h"
 #include "utils/token_utils.h"
 
 int main() {

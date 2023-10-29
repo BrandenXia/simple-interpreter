@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "token.h"
+#include "lexer/token.h"
 #include "utils/token_utils.h"
 #include "utils/char_utils.h"
 

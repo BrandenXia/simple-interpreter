@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "token.h"
+#include "lexer/token.h"
 
 inline const char *tokenTypeToString(TokenType type) {
     switch (type) {
