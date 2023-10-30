@@ -11,4 +11,7 @@ add_executable(simple_interpreter
     src/lexer/char_utils.c
     src/lexer/token.c
     src/lexer/token_utils.c
+    src/parser/parser.c
+    src/parser/ast.c
+    src/parser/ast_utils.c
 )
