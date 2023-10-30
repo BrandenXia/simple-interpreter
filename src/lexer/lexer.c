@@ -21,7 +21,12 @@ TokenList *tokenize(const char *input) {
         strncat(tmp, &input[current], 1);
         token->type = getType(tmp);
 
-        if (token->type == TOKEN_TYPE_BLANK) {
+        if (token->type == TOKEN_TYPE_UNKNOWN) {
+            token->value = malloc(sizeof(char));
+            strncpy(token->value, tmp, 1);
+            addToken(tokens, *token);
+            free(tmp);
+            free(token);
             current++;
             continue;
         }
