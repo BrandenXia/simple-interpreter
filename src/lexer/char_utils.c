@@ -1,5 +1,5 @@
 #include <string.h>
-#include "utils/char_utils.h"
+#include "lexer/char_utils.h"
 
 bool inArrayChar(const char array[], const char c) {
     unsigned long length;

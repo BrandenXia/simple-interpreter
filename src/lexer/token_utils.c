@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "lexer/token.h"
-#include "utils/token_utils.h"
-#include "utils/char_utils.h"
+#include "lexer/token_utils.h"
+#include "lexer/char_utils.h"
 
 inline const char *stringifyTokenType(TokenType type) {
     switch (type) {

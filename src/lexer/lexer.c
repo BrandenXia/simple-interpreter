@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "lexer/lexer.h"
-#include "utils/token_utils.h"
+#include "lexer/token_utils.h"
 
 TokenList *tokenize(const char *input) {
     int current;

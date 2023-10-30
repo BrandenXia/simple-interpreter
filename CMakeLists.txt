@@ -8,7 +8,8 @@ include_directories(include)
 add_executable(simple_interpreter
     src/main.c
     src/lexer/lexer.c
-    src/utils/char_utils.c
+    src/lexer/char_utils.c
     src/lexer/token.c
     src/utils/token_utils.c
+    src/lexer/token_utils.c
 )
