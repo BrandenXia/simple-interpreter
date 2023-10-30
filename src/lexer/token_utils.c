@@ -119,7 +119,7 @@ void printTokens(const TokenList *tokens) {
     printf("TokenList(%d) [\n", tokens->size);
     for (TokenNode *current = tokens->head; current != NULL; current = current->next) {
         printf("\t");
-        printToken(&current->data);
+        printToken(&current->token);
     }
     printf("]\n");
 }

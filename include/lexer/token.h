@@ -19,7 +19,7 @@ typedef struct {
 } Token;
 
 typedef struct TokenNode {
-    Token data;
+    Token token;
     struct TokenNode *next;
 } TokenNode;
 

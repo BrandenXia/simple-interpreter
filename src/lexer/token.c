@@ -26,7 +26,7 @@ void addToken(TokenList *list, Token token) {
     TokenNode *node;
 
     node = malloc(sizeof(TokenNode));
-    node->data = token;
+    node->token = token;
     node->next = NULL;
 
     if (list->head == NULL) {
