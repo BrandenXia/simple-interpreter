@@ -1,8 +1,6 @@
 #ifndef SIMPLE_INTERPRETER_TOKEN_H
 #define SIMPLE_INTERPRETER_TOKEN_H
 
-#include <stdbool.h>
-
 typedef enum {
     TOKEN_TYPE_OBJECT,
     TOKEN_TYPE_OPERATOR,
@@ -34,24 +32,6 @@ typedef struct {
 TokenList *newTokenList();
 
 void addToken(TokenList *list, Token token);
-
-typedef struct {
-    int size;
-    int capacity;
-    Token **token;
-} TokenStack;
-
-TokenStack *newTokenStack();
-
-bool isTokenStackEmpty(const TokenStack *stack);
-
-bool isTokenStackFull(const TokenStack *stack);
-
-void pushToken(TokenStack *stack, Token *token);
-
-Token *popToken(TokenStack *stack);
-
-const Token *peekToken(const TokenStack *stack);
 
 extern const char *OPERATORS[];
 
