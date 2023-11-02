@@ -6,7 +6,7 @@ bool inArrayChar(const char array[], const char c) {
 
     length = strlen(array);
 
-    for (int i = 0; i < length; i++) {
+    for (unsigned int i = 0; i < length; i++) {
         if (array[i] == c) {
             return true;
         }
@@ -20,7 +20,7 @@ int countChar(const char *str, const char c) {
 
     count = 0;
 
-    for (int i = 0; i < strlen(str); i++) {
+    for (int i = 0; i < (int) strlen(str); i++) {
         if (str[i] == c) {
             count++;
         }

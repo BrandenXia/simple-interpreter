@@ -27,6 +27,7 @@ inline const char *stringifyTokenType(TokenType type) {
         case TOKEN_TYPE_UNKNOWN:
             return "UNKNOWN";
     }
+    return "UNKNOWN";
 }
 
 bool isOperator(const char *c) {
@@ -70,7 +71,7 @@ bool isEnd(const char *c) {
 }
 
 bool isObject(const char *c) {
-    for (int i = 0; i < strlen(c); i++) {
+    for (int i = 0; i < (int) strlen(c); i++) {
         if (!isAlpha(c[i])) {
             return false;
         }
@@ -80,7 +81,7 @@ bool isObject(const char *c) {
 }
 
 bool isNumber(const char *c) {
-    for (int i = 0; i < strlen(c); i++) {
+    for (int i = 0; i < (int) strlen(c); i++) {
         if (!isDigit(c[i])) {
             return false;
         }

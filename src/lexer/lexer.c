@@ -11,7 +11,7 @@ TokenList *tokenize(const char *input) {
     current = 0;
     tokens = newTokenList();
 
-    while (current <= strlen(input)) {
+    while (current <= (int) strlen(input)) {
         TokenType type;
         char* tmp;
 
@@ -35,7 +35,7 @@ TokenList *tokenize(const char *input) {
             current++;
             strncat(tmp, &input[current], 1);
             type = getType(tmp);
-        } while (type == token->type && current <= strlen(input));
+        } while (type == token->type && current <= (int) strlen(input));
 
         token->value = malloc(sizeof(tmp) - sizeof(char));
         strncpy(token->value, tmp, strlen(tmp) - 1);
