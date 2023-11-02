@@ -48,9 +48,20 @@ bool isLeftParen(const char *c) {
     return inArrayChar(L_PARENS, *c);
 }
 
-bool isQuote(const char *c) {
-    if (strlen(c) != 1) return false;
-    return inArrayChar(QUOTES, *c);
+bool isString(const char *c) {
+    unsigned long len;
+
+    len = strlen(c);
+
+    if (inArrayChar(QUOTES, c[0])) {
+        if (len == 1) return true;
+        if (countChar(c, c[0]) == 2) {
+            return c[0] == c[len - 1];
+        }
+        return true;
+    }
+
+    return false;
 }
 
 bool isEnd(const char *c) {
@@ -96,7 +107,7 @@ TokenType getType(const char *c) {
         return TOKEN_TYPE_R_PAREN;
     } else if (isLeftParen(c)) {
         return TOKEN_TYPE_L_PAREN;
-    } else if (isQuote(c)) {
+    } else if (isString(c)) {
         return TOKEN_TYPE_STRING;
     } else if (isEnd(c)) {
         return TOKEN_TYPE_END;

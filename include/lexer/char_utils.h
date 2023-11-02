@@ -5,6 +5,8 @@
 
 bool inArrayChar(const char array[], char c);
 
+int countChar(const char *str, char c);
+
 bool isAlpha(char c);
 
 bool isDigit(char c);

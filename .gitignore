@@ -57,6 +57,7 @@ CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
 cmake-build-debug
+cmake-build-release
 CMakeScripts
 Testing
 Makefile

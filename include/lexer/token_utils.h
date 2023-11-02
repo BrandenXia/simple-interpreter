@@ -11,7 +11,7 @@ bool isRightParen(const char *c);
 
 bool isLeftParen(const char *c);
 
-bool isQuote(const char *c);
+bool isString(const char *c);
 
 bool isEnd(const char *c);
 

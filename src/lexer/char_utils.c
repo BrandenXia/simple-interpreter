@@ -15,6 +15,20 @@ bool inArrayChar(const char array[], const char c) {
     return false;
 }
 
+int countChar(const char *str, const char c) {
+    int count;
+
+    count = 0;
+
+    for (int i = 0; i < strlen(str); i++) {
+        if (str[i] == c) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
 bool isAlpha(const char c) {
     return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 }

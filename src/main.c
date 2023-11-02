@@ -2,9 +2,9 @@
 #include "lexer/token_utils.h"
 
 int main() {
-    char *str = "ab = (1 + 28)* 3 * '_aw38932u  *U@#*&#ecfkw';";
+    char *str = "'_aw38932u  *Ue#*&#ecfkw';";
 
-    TokenList *list = tokenize(str);
+    TokenList *tokens = tokenize(str);
 
-    printTokens(list);
+    printTokens(tokens);
 }
