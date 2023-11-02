@@ -1,6 +1,5 @@
 #include <ctype.h>
 #include <string.h>
-#include <stdlib.h>
 #include <stdio.h>
 #include "lexer/token.h"
 #include "lexer/token_utils.h"
@@ -31,22 +30,28 @@ inline const char *stringifyTokenType(TokenType type) {
 }
 
 bool isOperator(const char *c) {
-    for (int i = 0; OPERATORS[i][0] != '\0'; i++) {
-        if (strcmp(OPERATORS[i], c) == 0 || strcmp(strncpy(malloc(sizeof(char)), OPERATORS[i], 1), c) == 0) {
-            return true;
+    if (strlen(c) == 1) {
+        for (int i = 0; OPERATORS[i][0] != '\0'; i++) {
+            if (OPERATORS[i][0] == c[0]) {
+                return true;
+            }
+        }
+    } else {
+        for (int i = 0; OPERATORS[i][0] != '\0'; i++) {
+            if (strcmp(OPERATORS[i], c) == 0) {
+                return true;
+            }
         }
     }
     return false;
 }
 
 bool isRightParen(const char *c) {
-    if (strlen(c) != 1) return false;
-    return inArrayChar(R_PARENS, *c);
+    return inArrayChar(R_PARENS, *c) && strlen(c) == 1;
 }
 
 bool isLeftParen(const char *c) {
-    if (strlen(c) != 1) return false;
-    return inArrayChar(L_PARENS, *c);
+    return inArrayChar(L_PARENS, *c) && strlen(c) == 1;
 }
 
 bool isString(const char *c) {
@@ -66,8 +71,7 @@ bool isString(const char *c) {
 }
 
 bool isEnd(const char *c) {
-    if (strlen(c) != 1) return false;
-    return inArrayChar(ENDS, *c);
+    return inArrayChar(ENDS, *c) && strlen(c) == 1;
 }
 
 bool isObject(const char *c) {

@@ -29,7 +29,7 @@ typedef struct {
     int size;
 } TokenList;
 
-TokenList *newTokenList();
+TokenList *newTokenList(void);
 
 void addToken(TokenList *list, Token token);
 

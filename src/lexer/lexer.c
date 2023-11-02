@@ -13,7 +13,7 @@ TokenList *tokenize(const char *input) {
 
     while (current <= (int) strlen(input)) {
         TokenType type;
-        char* tmp;
+        char *tmp;
 
         token = malloc(sizeof(Token));
         tmp = malloc(sizeof(char));

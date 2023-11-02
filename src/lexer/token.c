@@ -11,7 +11,7 @@ const char QUOTES[] = "\"'";
 
 const char ENDS[] = ";";
 
-TokenList *newTokenList() {
+TokenList *newTokenList(void) {
     TokenList *list;
 
     list = malloc(sizeof(TokenList));
