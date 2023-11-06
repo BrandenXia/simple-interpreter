@@ -102,7 +102,7 @@ TokenType getType(const char *c) {
 }
 
 void printToken(const Token *token) {
-    printf("Token(%s, \"%s\")\n", stringifyTokenType(token->type), token->value);
+    printf("Token(%s, \"%s\")\n", stringifyTokenType(token->type), unescape(token->value));
 }
 
 void printTokens(const TokenList *tokens) {

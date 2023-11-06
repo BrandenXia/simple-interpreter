@@ -33,4 +33,9 @@ bool isAlpha(char c);
  */
 bool isDigit(char c);
 
+/*
+ * Return a string without escape characters.
+ */
+char *unescape(const char *str);
+
 #endif //SIMPLE_INTERPRETER_CHAR_UTILS_H
