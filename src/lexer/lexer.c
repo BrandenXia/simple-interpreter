@@ -3,45 +3,62 @@
 #include "lexer/lexer.h"
 #include "lexer/token_utils.h"
 
-TokenList *tokenize(const char *input) {
-    int current;
-    TokenList *tokens;
-    Token *token;
+Token nextToken(const char *input, int *current) {
+    Token token;
+    char *buffer;
+    int buffer_size;
 
-    current = 0;
-    tokens = newTokenList();
+    buffer = calloc(2, sizeof(char));
+    buffer_size = 2;
+    buffer[0] = input[*current];
+    buffer[1] = '\0';
+    (*current)++;
 
-    while (current <= (int) strlen(input)) {
-        TokenType type;
+    token.type = getType(buffer);
+    token.value = NULL;
+
+    if (token.type == TOKEN_TYPE_BLANK) {
+        free(buffer);
+        return nextToken(input, current);
+    }
+
+    do {
         char *tmp;
 
-        token = malloc(sizeof(Token));
-        tmp = malloc(sizeof(char));
-
-        strncat(tmp, &input[current], 1);
-        token->type = getType(tmp);
-
-        if (token->type == TOKEN_TYPE_UNKNOWN) {
-            token->value = malloc(sizeof(char));
-            strncpy(token->value, tmp, 1);
-            addToken(tokens, *token);
-            free(tmp);
-            free(token);
-            current++;
-            continue;
+        tmp = realloc(buffer, (buffer_size + 1) * sizeof(char));
+        if (tmp == NULL) {
+            free(buffer);
+            exit(1);
         }
+        buffer = tmp;
 
-        do {
-            current++;
-            strncat(tmp, &input[current], 1);
-            type = getType(tmp);
-        } while (type == token->type && current <= (int) strlen(input));
+        buffer[buffer_size - 1] = input[*current];
+        buffer[buffer_size] = '\0';
+        (*current)++;
+        buffer_size++;
+    } while (token.type == getType(buffer) && *current < (int) strlen(input));
 
-        token->value = malloc(sizeof(tmp) - sizeof(char));
-        strncpy(token->value, tmp, strlen(tmp) - 1);
-        addToken(tokens, *token);
-        free(tmp);
-        free(token);
+    token.value = calloc(buffer_size - 1, sizeof(char));
+    memset(token.value, '\0', buffer_size - 1);
+    strncpy(token.value, buffer, buffer_size - 2);
+    (*current)--;
+
+    free(buffer);
+
+    return token;
+}
+
+TokenList *tokenize(const char *input) {
+    TokenList *tokens;
+    Token token;
+    int current;
+
+    tokens = newTokenList();
+    current = 0;
+
+    while (current < (int) strlen(input)) {
+        token = nextToken(input, &current);
+        addToken(tokens, token);
     }
 
     return tokens;

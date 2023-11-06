@@ -75,34 +75,15 @@ bool isEnd(const char *c) {
 }
 
 bool isObject(const char *c) {
-    for (int i = 0; i < (int) strlen(c); i++) {
-        if (!isAlpha(c[i])) {
-            return false;
-        }
-    }
-
-    return true;
+    return allChar(c, isAlpha);
 }
 
 bool isNumber(const char *c) {
-    for (int i = 0; i < (int) strlen(c); i++) {
-        if (!isDigit(c[i])) {
-            return false;
-        }
-    }
-
-    return true;
+    return allChar(c, isDigit);
 }
 
 bool isBlank(const char *c) {
-    while (*c != '\0') {
-        if (!isspace(*c)) {
-            return false;
-        }
-        c++;
-    }
-
-    return true;
+    return isspace(*c);
 }
 
 TokenType getType(const char *c) {

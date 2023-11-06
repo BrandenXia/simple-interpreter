@@ -5,6 +5,8 @@
 
 bool inArrayChar(const char array[], char c);
 
+bool allChar(const char *str, bool (*func)(char));
+
 int countChar(const char *str, char c);
 
 bool isAlpha(char c);

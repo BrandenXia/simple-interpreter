@@ -15,6 +15,16 @@ bool inArrayChar(const char array[], const char c) {
     return false;
 }
 
+bool allChar(const char *str, bool (*func)(const char)) {
+    for (int i = 0; i < (int) strlen(str); i++) {
+        if (!func(str[i])) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 int countChar(const char *str, const char c) {
     int count;
 
