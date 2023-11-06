@@ -3,7 +3,8 @@
 
 typedef enum {
     TOKEN_TYPE_OBJECT,
-    TOKEN_TYPE_OPERATOR,
+    TOKEN_TYPE_UNARY_OPERATOR,
+    TOKEN_TYPE_BINARY_OPERATOR,
     TOKEN_TYPE_NUMBER,
     TOKEN_TYPE_STRING,
     TOKEN_TYPE_L_PAREN,
@@ -33,7 +34,9 @@ TokenList *newTokenList(void);
 
 void addToken(TokenList *list, Token token);
 
-extern const char *OPERATORS[];
+extern const char *UNARY_OPERATORS[];
+
+extern const char *BINARY_OPERATORS[];
 
 extern const char L_PARENS[];
 

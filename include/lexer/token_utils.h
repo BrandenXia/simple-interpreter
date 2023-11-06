@@ -5,7 +5,9 @@
 
 const char *stringifyTokenType(TokenType type);
 
-bool isOperator(const char *c);
+bool isUnaryOperator(const char *c);
+
+bool isBinaryOperator(const char *c);
 
 bool isRightParen(const char *c);
 

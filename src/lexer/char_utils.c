@@ -25,6 +25,16 @@ bool allChar(const char *str, bool (*func)(const char)) {
     return true;
 }
 
+bool matchStringStart(const char *str, const char *match[]) {
+    for (int i = 0; match[i][0] != '\0'; i++) {
+        if (strncmp(str, match[i], strlen(str)) == 0) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 int countChar(const char *str, const char c) {
     int count;
 

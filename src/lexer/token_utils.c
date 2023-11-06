@@ -9,8 +9,10 @@ inline const char *stringifyTokenType(TokenType type) {
     switch (type) {
         case TOKEN_TYPE_OBJECT:
             return "OBJECT";
-        case TOKEN_TYPE_OPERATOR:
-            return "OPERATOR";
+        case TOKEN_TYPE_UNARY_OPERATOR:
+            return "UNARY_OPERATOR";
+        case TOKEN_TYPE_BINARY_OPERATOR:
+            return "BINARY_OPERATOR";
         case TOKEN_TYPE_NUMBER:
             return "NUMBER";
         case TOKEN_TYPE_STRING:
@@ -29,21 +31,12 @@ inline const char *stringifyTokenType(TokenType type) {
     return "UNKNOWN";
 }
 
-bool isOperator(const char *c) {
-    if (strlen(c) == 1) {
-        for (int i = 0; OPERATORS[i][0] != '\0'; i++) {
-            if (OPERATORS[i][0] == c[0]) {
-                return true;
-            }
-        }
-    } else {
-        for (int i = 0; OPERATORS[i][0] != '\0'; i++) {
-            if (strcmp(OPERATORS[i], c) == 0) {
-                return true;
-            }
-        }
-    }
-    return false;
+bool isUnaryOperator(const char *c) {
+    return matchStringStart(c, UNARY_OPERATORS);
+}
+
+bool isBinaryOperator(const char *c) {
+    return matchStringStart(c, BINARY_OPERATORS);
 }
 
 bool isRightParen(const char *c) {
@@ -61,9 +54,7 @@ bool isString(const char *c) {
 
     if (inArrayChar(QUOTES, c[0])) {
         if (len == 1) return true;
-        if (countChar(c, c[0]) == 2) {
-            return c[0] == c[len - 1];
-        }
+        if (countChar(c, c[0]) == 2) return c[0] == c[len - 1];
         return true;
     }
 
@@ -87,8 +78,10 @@ bool isBlank(const char *c) {
 }
 
 TokenType getType(const char *c) {
-    if (isOperator(c)) {
-        return TOKEN_TYPE_OPERATOR;
+    if (isUnaryOperator(c)) {
+        return TOKEN_TYPE_UNARY_OPERATOR;
+    } else if (isBinaryOperator(c)) {
+        return TOKEN_TYPE_BINARY_OPERATOR;
     } else if (isRightParen(c)) {
         return TOKEN_TYPE_R_PAREN;
     } else if (isLeftParen(c)) {

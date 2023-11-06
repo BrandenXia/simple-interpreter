@@ -1,7 +1,9 @@
 #include <stdlib.h>
 #include "lexer/token.h"
 
-const char *OPERATORS[] = {"+", "-", "*", "/", "^", "%", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!", ""};
+const char *UNARY_OPERATORS[] = {"!", ""};
+
+const char *BINARY_OPERATORS[] = {"+", "-", "*", "/", "^", "%", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", ""};
 
 const char L_PARENS[] = "({[";
 
