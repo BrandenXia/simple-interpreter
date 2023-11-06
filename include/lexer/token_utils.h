@@ -23,10 +23,19 @@ bool isNumber(const char *c);
 
 bool isBlank(const char *c);
 
+/*
+ * Get the TokenType of given string.
+ */
 TokenType getType(const char *c);
 
+/*
+ * Print the given token.
+ */
 void printToken(const Token *token);
 
+/*
+ * Print the given token list.
+ */
 void printTokens(const TokenList *tokens);
 
 #endif //SIMPLE_INTERPRETER_TOKEN_UTILS_H
