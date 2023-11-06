@@ -11,7 +11,7 @@ const char R_PARENS[] = ")}]";
 
 const char QUOTES[] = "\"'";
 
-const char ENDS[] = ";";
+const char ENDS[] = ";\n";
 
 TokenList *newTokenList(void) {
     TokenList *list;
