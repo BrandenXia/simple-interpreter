@@ -19,7 +19,7 @@ Token nextToken(const char *input, int *current) {
 
     if (token.type == TOKEN_TYPE_BLANK) {
         free(buffer);
-        return nextToken(input, current);
+        return token;
     }
 
     do {
@@ -58,6 +58,7 @@ TokenList *tokenize(const char *input) {
 
     while (current < (int) strlen(input)) {
         token = nextToken(input, &current);
+        if (token.value == NULL) continue;
         addToken(tokens, token);
     }
 
