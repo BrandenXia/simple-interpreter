@@ -58,15 +58,15 @@ bool isDigit(const char c) {
     return c >= '0' && c <= '9';
 }
 
-char *unescape(const char *str) {
+void unescape(char **dst, const char *str) {
     if (str == NULL) {
-        return NULL;
+        return;
     }
 
     int str_size = (int) strlen(str);
     char *buffer = calloc(2 * str_size + 1, sizeof(char));
     if (buffer == NULL) {
-        return NULL;
+        return;
     }
 
     int buffer_current = 0;
@@ -117,5 +117,5 @@ char *unescape(const char *str) {
         }
     }
 
-    return buffer;
+    *dst = buffer;
 }

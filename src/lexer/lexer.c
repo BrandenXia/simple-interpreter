@@ -59,13 +59,13 @@ Token nextToken(const char *input, int *current) {
     return token;
 }
 
-TokenList *tokenize(const char *input) {
+void tokenize(TokenList **dst, const char *input) {
     TokenList *tokens;
     Token token;
     int current;
 
     // Initialize variables
-    tokens = newTokenList();
+    initializeTokenList(&tokens);
     current = 0;
 
     // Loop until the end of the input
@@ -75,5 +75,6 @@ TokenList *tokenize(const char *input) {
         addToken(tokens, token);
     }
 
-    return tokens;
+    // Assign tokens to dst
+    *dst = tokens;
 }

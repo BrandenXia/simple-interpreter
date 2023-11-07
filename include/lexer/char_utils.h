@@ -35,8 +35,8 @@ bool isDigit(char c);
 
 /*
  * Return a string without escape characters.
- * This function allocates memory for the new string. Remember to free it.
+ * This function allocates memory for the new string. The caller is responsible for freeing it.
  */
-char *unescape(const char *str);
+void unescape(char **dst, const char *str);
 
 #endif //SIMPLE_INTERPRETER_CHAR_UTILS_H

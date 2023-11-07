@@ -62,9 +62,9 @@ typedef struct {
 } TokenList;
 
 /*
- * Create a new token list.
+ * Initialize a token list.
  */
-TokenList *newTokenList(void);
+void initializeTokenList(TokenList **dst);
 
 /*
  * Add a token to the token list.

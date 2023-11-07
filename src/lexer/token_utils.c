@@ -105,7 +105,7 @@ TokenType getType(const char *c) {
 void printToken(const Token *token) {
     char *escapedValue;
 
-    escapedValue = unescape(token->value);
+    unescape(&escapedValue, token->value);
     printf("Token(%s, \"%s\")\n", stringifyTokenType(token->type), escapedValue);
     free(escapedValue);
 }

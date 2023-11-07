@@ -10,7 +10,8 @@ Token nextToken(const char *input, int *current);
 
 /*
  * Tokenize the input string.
+ * This function allocates memory for the token list, so the caller is responsible for freeing it.
  */
-TokenList *tokenize(const char *input);
+void tokenize(TokenList **dst, const char *input);
 
 #endif //SIMPLE_INTERPRETER_LEXER_H

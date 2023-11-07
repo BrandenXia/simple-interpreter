@@ -13,7 +13,7 @@ const char QUOTES[] = "\"'";
 
 const char ENDS[] = ";\n";
 
-TokenList *newTokenList(void) {
+void initializeTokenList(TokenList **dst) {
     TokenList *list;
 
     list = malloc(sizeof(TokenList));
@@ -21,7 +21,7 @@ TokenList *newTokenList(void) {
     list->tail = NULL;
     list->size = 0;
 
-    return list;
+    *dst = list;
 }
 
 void addToken(TokenList *list, Token token) {
