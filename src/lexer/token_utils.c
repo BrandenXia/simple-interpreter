@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "lexer/token.h"
 #include "lexer/token_utils.h"
 #include "lexer/char_utils.h"
@@ -26,9 +27,9 @@ inline const char *stringifyTokenType(TokenType type) {
         case TOKEN_TYPE_BLANK:
             return "BLANK";
         case TOKEN_TYPE_UNKNOWN:
+        default:
             return "UNKNOWN";
     }
-    return "UNKNOWN";
 }
 
 bool isUnaryOperator(const char *c) {
@@ -102,7 +103,11 @@ TokenType getType(const char *c) {
 }
 
 void printToken(const Token *token) {
-    printf("Token(%s, \"%s\")\n", stringifyTokenType(token->type), unescape(token->value));
+    char *escapedValue;
+
+    escapedValue = unescape(token->value);
+    printf("Token(%s, \"%s\")\n", stringifyTokenType(token->type), escapedValue);
+    free(escapedValue);
 }
 
 void printTokens(const TokenList *tokens) {

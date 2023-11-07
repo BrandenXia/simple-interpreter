@@ -59,67 +59,61 @@ bool isDigit(const char c) {
 }
 
 char *unescape(const char *str) {
-    char *buffer, *tmp, c;
-    int buffer_size, buffer_current, str_size;
-    bool escape;
+    if (str == NULL) {
+        return NULL;
+    }
 
-    // Initialize variables
-    buffer_size = (int) strlen(str);
-    str_size = buffer_size;
-    buffer_current = 0;
-    buffer = calloc(buffer_size, sizeof(char));
-    escape = false;
+    int str_size = (int) strlen(str);
+    char *buffer = calloc(2 * str_size + 1, sizeof(char));
+    if (buffer == NULL) {
+        return NULL;
+    }
 
-    for (int i = 0; i < str_size; i++, buffer_current++) {
-        escape = false;
-        // Check for escape characters
-        switch (str[i]) {
+    int buffer_current = 0;
+    for (int i = 0; i < str_size; i++) {
+        char c = str[i];
+        bool escape = false;
+        char escape_char;
+
+        switch (c) {
             case '\a':
-                c = 'a';
+                escape_char = 'a';
                 escape = true;
                 break;
             case '\b':
-                c = 'b';
+                escape_char = 'b';
                 escape = true;
                 break;
             case '\f':
-                c = 'f';
+                escape_char = 'f';
                 escape = true;
                 break;
             case '\n':
-                c = 'n';
+                escape_char = 'n';
                 escape = true;
                 break;
             case '\r':
-                c = 'r';
+                escape_char = 'r';
                 escape = true;
                 break;
             case '\t':
-                c = 't';
+                escape_char = 't';
                 escape = true;
                 break;
             case '\v':
-                c = 'v';
+                escape_char = 'v';
                 escape = true;
+                break;
+            default:
+                escape_char = c;
                 break;
         }
 
         if (escape) {
-            // Reallocate buffer to fit the next character
-            tmp = realloc(buffer, (buffer_size + 1) * sizeof(char));
-            if (tmp == NULL) {
-                free(buffer);
-                exit(1);
-            }
-            buffer = tmp;
-
-            // Append the next character to the buffer
-            buffer[buffer_size - 1] = '\\';
-            buffer[buffer_size] = c;
-            buffer_size++;
-            buffer_current++;
+            buffer[buffer_current++] = '\\';
+            buffer[buffer_current++] = escape_char;
         } else {
-            buffer[buffer_current] = str[i];
+            buffer[buffer_current++] = c;
         }
     }
 

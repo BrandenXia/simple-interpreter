@@ -35,6 +35,7 @@ bool isDigit(char c);
 
 /*
  * Return a string without escape characters.
+ * This function allocates memory for the new string. Remember to free it.
  */
 char *unescape(const char *str);
 
