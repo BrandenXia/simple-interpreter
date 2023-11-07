@@ -9,4 +9,6 @@ int main(void) {
     tokenize(&tokens, str);
 
     printTokens(tokens);
+
+    freeTokenList(tokens);
 }

@@ -24,6 +24,18 @@ void initializeTokenList(TokenList **dst) {
     *dst = list;
 }
 
+void freeTokenList(TokenList *list) {
+    TokenNode *node, *next;
+
+    for (node = list->head; node != NULL;) {
+        next = node->next;
+        free(node);
+        node = next;
+    }
+
+    free(list);
+}
+
 void addToken(TokenList *list, Token token) {
     TokenNode *node;
 

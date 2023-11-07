@@ -67,6 +67,11 @@ typedef struct {
 void initializeTokenList(TokenList **dst);
 
 /*
+ * Free a token list.
+ */
+void freeTokenList(TokenList *list);
+
+/*
  * Add a token to the token list.
  */
 void addToken(TokenList *list, Token token);
