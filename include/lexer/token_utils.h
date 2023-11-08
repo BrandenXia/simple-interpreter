@@ -2,6 +2,7 @@
 #define SIMPLE_INTERPRETER_TOKEN_UTILS_H
 
 #include <stdbool.h>
+#include "lexer/token.h"
 
 const char *stringifyTokenType(TokenType type);
 
