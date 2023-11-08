@@ -45,4 +45,8 @@ void printAST(ASTNode *root, int level) {
         printf("\n");
         printAST(root->child[i], level + 1);
     }
+
+    if (level == 0) {
+        printf("\n");
+    }
 }

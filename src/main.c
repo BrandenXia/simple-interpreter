@@ -7,7 +7,7 @@ int main(void) {
     TokenList *tokens;
     ASTNode *root;
 
-    char *str = "ab = a * 2 + 3;";
+    char *str = "ab = a * 2 + 3; cd = 2 + 3 * 4;";
 
     tokenize(&tokens, str);
 
