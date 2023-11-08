@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include "parser/ast.h"
 
 void initializeASTNode(ASTNode **dst, ASTNodeType type) {
@@ -18,6 +19,7 @@ void freeASTNode(ASTNode *node) {
     int i;
 
     if (node->token != NULL) {
+        free(node->token->value);
         free(node->token);
     }
 
@@ -47,13 +49,17 @@ void addASTNodeChild(ASTNode *parent, ASTNode *child) {
 
 void addASTNodeToken(ASTNode *node, Token *token) {
     Token *tmp;
+    char *value;
 
     node->token_count++;
     tmp = realloc(node->token, sizeof(Token) * node->token_count);
+    value = calloc(strlen(token->value) + 1, sizeof(char));
     if (tmp == NULL) {
         freeASTNode(node);
         exit(1);
     }
+    strcpy(value, token->value);
     node->token = tmp;
     node->token[node->token_count - 1] = *token;
+    node->token[node->token_count - 1].value = value;
 }

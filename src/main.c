@@ -7,14 +7,17 @@ int main(void) {
     TokenList *tokens;
     ASTNode *root;
 
-    char *str = "ab = a * 2 + 3;\n";
+    char *str = "ab = a * 2 + 3;";
 
     tokenize(&tokens, str);
+
     printTokens(tokens);
 
     parse(&root, tokens);
-    printAST(root, 0);
 
     freeTokenList(tokens);
+
+    printAST(root, 0);
+
     freeASTNode(root);
 }

@@ -29,6 +29,7 @@ void freeTokenList(TokenList *list) {
 
     for (node = list->head; node != NULL;) {
         next = node->next;
+        free(node->token.value);
         free(node);
         node = next;
     }
