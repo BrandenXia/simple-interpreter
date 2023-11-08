@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "lexer/token_utils.h"
 #include "parser/ast_utils.h"
 
 inline const char *stringifyASTNodeTypes(ASTNodeType type) {
@@ -29,10 +30,19 @@ void printAST(ASTNode *root, int level) {
         printf("|- ");
     }
 
+    // Print the type of the node
     printf("%s", stringifyASTNodeTypes(root->type));
+
+    // Print type of the tokens
+    printf(" (");
+    for (int i = 0; i < root->tokens_count - 1; i++) {
+        printf("%s ", stringifyTokenType(root->tokens[i].type));
+    }
+    printf("%s", stringifyTokenType(root->tokens[root->tokens_count - 1].type));
+    printf(")");
 
     for (int i = 0; i < root->child_count; i++) {
         printf("\n");
-        printAST(root->children[i], level + 1);
+        printAST(root->child[i], level + 1);
     }
 }

@@ -31,9 +31,9 @@ typedef enum {
  */
 typedef struct ASTNode {
     ASTNodeType type;
-    Token *token;
-    int token_count;
-    struct ASTNode **children;
+    Token *tokens;
+    int tokens_count;
+    struct ASTNode **child;
     int child_count;
 } ASTNode;
 
