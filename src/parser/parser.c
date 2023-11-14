@@ -4,16 +4,21 @@
 void parse(ASTNode **dst, TokenList *tokens) {
     ASTNode *root;
 
-    // Initialize the root node.
+    // Initialize the root node
     initializeASTNode(&root, AST_NODE_TYPE_PROGRAM);
 
-    // Add all tokens to the root node.
+    // Add all tokens to the root node
     for (TokenNode *current = tokens->head; current != NULL; current = current->next) {
         addASTNodeToken(root, &current->token);
     }
 
-    // Parse the program.
+    // Parse the program to statements
     parseProgram(root);
+
+    for (int i = 0; i < root->child_count; i++) {
+        // Parse each statement
+//        parseStatement(root->child[i]);
+    }
 
     *dst = root;
 }

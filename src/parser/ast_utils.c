@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "lexer/token_utils.h"
 #include "parser/ast_utils.h"
 
@@ -8,8 +9,6 @@ inline const char *stringifyASTNodeTypes(ASTNodeType type) {
             return "AST_NODE_TYPE_PROGRAM";
         case AST_NODE_TYPE_STMT:
             return "AST_NODE_TYPE_STMT";
-        case AST_NODE_TYPE_EXPR:
-            return "AST_NODE_TYPE_EXPR";
         case AST_NODE_TYPE_VAR:
             return "AST_NODE_TYPE_VAR";
         case AST_NODE_TYPE_CONST:
@@ -21,7 +20,29 @@ inline const char *stringifyASTNodeTypes(ASTNodeType type) {
     }
 }
 
-void printAST(ASTNode *root, int level) {
+int getPrecedence(const char *op) {
+    if (strcmp(op, "=") == 0) {
+        return 0;
+    } else if (strcmp(op, "&&") == 0) {
+        return 1;
+    } else if (strcmp(op, "||") == 0) {
+        return 2;
+    } else if (strcmp(op, "==") == 0 || strcmp(op, "!=") == 0) {
+        return 3;
+    } else if (strcmp(op, "<") == 0 || strcmp(op, ">") == 0 || strcmp(op, "<=") == 0 || strcmp(op, ">=") == 0) {
+        return 4;
+    } else if (strcmp(op, "+") == 0 || strcmp(op, "-") == 0) {
+        return 5;
+    } else if (strcmp(op, "*") == 0 || strcmp(op, "/") == 0 || strcmp(op, "%") == 0) {
+        return 6;
+    } else if (strcmp(op, "^") == 0) {
+        return 7;
+    } else {
+        return -1;
+    }
+}
+
+void printAST(const ASTNode *root, int level) {
     for (int i = 0; i < level; i++) {
         printf("\t");
     }

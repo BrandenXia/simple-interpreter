@@ -18,9 +18,4 @@ void parseProgram(ASTNode *ast);
  */
 void parseStatement(ASTNode *ast);
 
-/*
- * Parse an expression node.
- */
-void parseExpression(ASTNode *ast);
-
 #endif //SIMPLE_INTERPRETER_PARSER_H
