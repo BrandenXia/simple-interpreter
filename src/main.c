@@ -6,10 +6,11 @@
 int main(void) {
     TokenList *tokens;
     ASTNode *root;
+    FILE *input;
 
-    char *str = "ab = a * 2 + 3; cd = 2 + 3 * 4;";
+    input = fopen("../test.txt", "r");
 
-    tokenize(&tokens, str);
+    tokenize(&tokens, input);
 
     printTokens(tokens);
 

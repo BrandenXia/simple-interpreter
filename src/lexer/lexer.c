@@ -3,7 +3,7 @@
 #include "lexer/lexer.h"
 #include "lexer/token_utils.h"
 
-Token nextToken(const char *input, int *current) {
+Token nextToken(FILE *input) {
     Token token;
     char *buffer;
     int buffer_size;
@@ -11,9 +11,8 @@ Token nextToken(const char *input, int *current) {
     // Initialize buffer
     buffer = calloc(2, sizeof(char));
     buffer_size = 2;
-    buffer[0] = input[*current];
+    buffer[0] = (char) getc(input);
     buffer[1] = '\0';
-    (*current)++;
 
     // Initialize token
     token.type = getType(buffer);
@@ -38,20 +37,19 @@ Token nextToken(const char *input, int *current) {
         buffer = tmp;
 
         // Append the next character to the buffer
-        buffer[buffer_size - 1] = input[*current];
+        buffer[buffer_size - 1] = (char) getc(input);
         buffer[buffer_size] = '\0';
 
         // Update the index and buffer size
-        (*current)++;
         buffer_size++;
-    } while (token.type == getType(buffer) && *current < (int) strlen(input));
+    } while (token.type == getType(buffer));
 
     // Assign buffer minus the last character to token value
     token.value = calloc(buffer_size - 1, sizeof(char));
     memset(token.value, '\0', buffer_size - 1);
     strncpy(token.value, buffer, buffer_size - 2);
     // Go back one character
-    (*current)--;
+    fseek(input, -1, SEEK_CUR);
 
     // Free buffer
     free(buffer);
@@ -59,20 +57,25 @@ Token nextToken(const char *input, int *current) {
     return token;
 }
 
-void tokenize(TokenList **dst, const char *input) {
+void tokenize(TokenList **dst, FILE *input) {
     TokenList *tokens;
     Token token;
-    int current;
+    long length, current;
 
     // Initialize variables
     initializeTokenList(&tokens);
+    fseek(input, 0, SEEK_END);
+    length = ftell(input);
+    fseek(input, 0, SEEK_SET);
     current = 0;
 
     // Loop until the end of the input
-    while (current < (int) strlen(input)) {
-        token = nextToken(input, &current);  // Get the next token
+    while (current < length) {
+        token = nextToken(input);  // Get the next token
         if (token.value == NULL) continue;  // Skip if the token value is NULL
         addToken(tokens, token);
+        if (current == length - 1) break; // Exit if the end of the input is reached
+        current = ftell(input);
     }
 
     // Assign tokens to dst
