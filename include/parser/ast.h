@@ -30,8 +30,7 @@ typedef enum {
  */
 typedef struct ASTNode {
     ASTNodeType type;
-    Token *tokens;
-    int tokens_count;
+    TokenStack *tokens;
     struct ASTNode **child;
     int child_count;
 } ASTNode;
@@ -50,10 +49,5 @@ void freeASTNode(ASTNode *node);
  * Add a child node to the parent node.
  */
 void addASTNodeChild(ASTNode *parent, ASTNode *child);
-
-/*
- * Add a token to the AST node.
- */
-void addASTNodeToken(ASTNode *node, Token *token);
 
 #endif //SIMPLE_INTERPRETER_AST_H

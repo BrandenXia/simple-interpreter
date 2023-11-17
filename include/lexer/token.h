@@ -76,6 +76,43 @@ void freeTokenList(TokenList *list);
  */
 void addToken(TokenList *list, Token token);
 
+/*
+ * Token stack:
+ * - tokens: tokens
+ * - size: size of the stack
+ * - capacity: capacity of the stack
+ */
+typedef struct {
+    Token *tokens;
+    int size;
+    int capacity;
+} TokenStack;
+
+/*
+ * Initialize a token stack.
+ */
+void initializeTokenStack(TokenStack **dst);
+
+/*
+ * Free a token stack.
+ */
+void freeTokenStack(TokenStack *stack);
+
+/*
+ * Push a token to the token stack.
+ */
+void pushToken(TokenStack *stack, Token token);
+
+/*
+ * Pop a token from the token stack.
+ */
+Token popToken(TokenStack *stack);
+
+/*
+ * Peek a token from the token stack.
+ */
+Token peekToken(TokenStack *stack);
+
 extern const char *UNARY_OPERATORS[];
 
 extern const char *BINARY_OPERATORS[];

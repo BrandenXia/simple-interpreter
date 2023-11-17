@@ -9,7 +9,7 @@ void parse(ASTNode **dst, TokenList *tokens) {
 
     // Add all tokens to the root node
     for (TokenNode *current = tokens->head; current != NULL; current = current->next) {
-        addASTNodeToken(root, &current->token);
+        pushToken(root->tokens, current->token);
     }
 
     // Parse the program to statements
@@ -30,10 +30,10 @@ void parseProgram(ASTNode *ast) {
     initializeASTNode(&stmt, AST_NODE_TYPE_STMT);
 
     // Add all tokens to the statement node.
-    for (int i = 0; i < ast->tokens_count; i++) {
+    for (int i = 0; i < ast->tokens->size; i++) {
         // If it's the end of the statement, add the statement node to the AST and initialize a new statement node.
-        if (ast->tokens[i].type == TOKEN_TYPE_END) {
-            if (stmt->tokens_count > 0) {
+        if (ast->tokens->tokens[i].type == TOKEN_TYPE_END) {
+            if (stmt->tokens->size > 0) {
                 addASTNodeChild(ast, stmt);
                 initializeASTNode(&stmt, AST_NODE_TYPE_STMT);
             }
@@ -42,6 +42,6 @@ void parseProgram(ASTNode *ast) {
         }
 
         // Add the token to the statement node.
-        addASTNodeToken(stmt, &ast->tokens[i]);
+        pushToken(stmt->tokens, ast->tokens->tokens[i]);
     }
 }

@@ -8,8 +8,7 @@ void initializeASTNode(ASTNode **dst, ASTNodeType type) {
     // Allocate memory for the node.
     node = malloc(sizeof(ASTNode));
     node->type = type;
-    node->tokens = NULL;
-    node->tokens_count = 0;
+    initializeTokenStack(&node->tokens);
     node->child = NULL;
     node->child_count = 0;
 
@@ -21,8 +20,7 @@ void freeASTNode(ASTNode *node) {
 
     // Free the tokens
     if (node->tokens != NULL) {
-        free(node->tokens->value); // Free the value of the token
-        free(node->tokens); // Free the token
+        freeTokenStack(node->tokens);
     }
 
     for (i = 0; i < node->child_count; i++) {
@@ -47,21 +45,4 @@ void addASTNodeChild(ASTNode *parent, ASTNode *child) {
     }
     parent->child = tmp; // Set the child array to the new array
     parent->child[parent->child_count - 1] = child; // Add the child to the array
-}
-
-void addASTNodeToken(ASTNode *node, Token *token) {
-    Token *tmp;
-    char *value;
-
-    node->tokens_count++; // Increment the token count
-    tmp = realloc(node->tokens, sizeof(Token) * node->tokens_count); // Reallocate the token array
-    value = calloc(strlen(token->value) + 1, sizeof(char)); // Allocate memory for the value of the token
-    if (tmp == NULL) {
-        freeASTNode(node);
-        exit(1);
-    }
-    strcpy(value, token->value); // Copy the value of the token
-    node->tokens = tmp; // Set the token array to the new array
-    node->tokens[node->tokens_count - 1] = *token; // Add the token to the array
-    node->tokens[node->tokens_count - 1].value = value; // Assign the value of the token
 }
