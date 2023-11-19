@@ -116,7 +116,8 @@ void shuntingYard(TokenStack **dst, TokenStack *tokens) {
         if (token.type == TOKEN_TYPE_OBJECT || token.type == TOKEN_TYPE_NUMBER || token.type == TOKEN_TYPE_STRING) {
             pushToken(objects, token);
         } else if (token.type == TOKEN_TYPE_BINARY_OPERATOR || token.type == TOKEN_TYPE_UNARY_OPERATOR) {
-            while (operators->size > 0 && getPrecedence(operators->tokens[operators->size - 1].value) >= getPrecedence(token.value)) {
+            while (operators->size > 0 &&
+                   getPrecedence(operators->tokens[operators->size - 1].value) >= getPrecedence(token.value)) {
                 pushToken(objects, popToken(operators));
             }
             pushToken(operators, token);

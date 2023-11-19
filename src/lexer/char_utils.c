@@ -18,9 +18,7 @@ bool inArrayChar(const char array[], const char c) {
 
 bool allChar(const char *str, bool (*func)(const char)) {
     for (int i = 0; i < (int) strlen(str); i++) {
-        if (!func(str[i])) {
-            return false;
-        }
+        if (!func(str[i])) return false;
     }
 
     return true;
@@ -28,9 +26,7 @@ bool allChar(const char *str, bool (*func)(const char)) {
 
 bool matchStringStart(const char *str, const char *match[]) {
     for (int i = 0; match[i][0] != '\0'; i++) {
-        if (strncmp(str, match[i], strlen(str)) == 0) {
-            return true;
-        }
+        if (strncmp(str, match[i], strlen(str)) == 0) return true;
     }
 
     return false;
@@ -42,9 +38,7 @@ int countChar(const char *str, const char c) {
     count = 0;
 
     for (int i = 0; i < (int) strlen(str); i++) {
-        if (str[i] == c) {
-            count++;
-        }
+        if (str[i] == c) count++;
     }
 
     return count;
@@ -59,15 +53,10 @@ bool isDigit(const char c) {
 }
 
 void unescape(char **dst, const char *str) {
-    if (str == NULL) {
-        return;
-    }
+    if (str == NULL) return;
 
     int str_size = (int) strlen(str);
     char *buffer = calloc(2 * str_size + 1, sizeof(char));
-    if (buffer == NULL) {
-        return;
-    }
 
     int buffer_current = 0;
     for (int i = 0; i < str_size; i++) {

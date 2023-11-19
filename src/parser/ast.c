@@ -16,14 +16,10 @@ void initializeASTNode(ASTNode **dst, ASTNodeType type) {
 
 void freeASTNode(ASTNode *node) {
     // Free the tokens
-    if (node->tokens != NULL) {
-        freeTokenStack(node->tokens);
-    }
+    if (node->tokens != NULL) freeTokenStack(node->tokens);
 
     // Free the children
-    if (node->child != NULL) {
-        freeASTNodeStack(node->child);
-    }
+    if (node->child != NULL) freeASTNodeStack(node->child);
 
     free(node); // Free the node itself
 }
@@ -54,9 +50,7 @@ void pushASTNode(ASTNodeStack *stack, ASTNode *node) {
     if (stack->size == stack->capacity) {
         stack->capacity *= 2;
         tmp = realloc(stack->nodes, stack->capacity * sizeof(ASTNode *));
-        if (tmp == NULL) {
-            exit(1);
-        }
+        if (tmp == NULL) exit(1);
         stack->nodes = tmp;
     }
 

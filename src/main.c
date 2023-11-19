@@ -58,11 +58,10 @@ int main(int argc, char *argv[]) {
         printf(">>> ");
 
         while (getline(&line, &len, stdin) != -1) {
-            if (strcmp(line, "exit\n") == 0) {
-                break;
-            }
+            if (strcmp(line, "exit\n") == 0) break;
 
-            run(fmemopen(line, strlen(line), "r"), cli->flags[TOKEN_FLAG], cli->flags[AST_FLAG], cli->flags[VERBOSE_FLAG]);
+            run(fmemopen(line, strlen(line), "r"), cli->flags[TOKEN_FLAG], cli->flags[AST_FLAG],
+                cli->flags[VERBOSE_FLAG]);
 
             printf(">>> ");
         }

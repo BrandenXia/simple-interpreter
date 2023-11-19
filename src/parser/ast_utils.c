@@ -49,9 +49,7 @@ void printAST(const ASTNode *root, int level) {
         printf("\t");
     }
 
-    if (level > 0) {
-        printf("|- ");
-    }
+    if (level > 0) printf("|- ");
 
     // Print the type of the node
     printf("%s", stringifyASTNodeTypes(root->type));
@@ -70,7 +68,5 @@ void printAST(const ASTNode *root, int level) {
     }
 
     // If it's the root node, print a newline at the end
-    if (level == 0) {
-        printf("\n");
-    }
+    if (level == 0) printf("\n");
 }
