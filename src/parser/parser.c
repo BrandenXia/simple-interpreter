@@ -49,11 +49,58 @@ void parseProgram(ASTNode *ast) {
 
 void parseStatement(ASTNode *ast) {
     TokenStack *tokens;
+    ASTNodeStack *nodes;
 
+    // Convert the statement into a postfix token stack.
     shuntingYard(&tokens, ast->tokens);
 
-    // TODO: postfix to AST
+    // Initialize the AST node stack.
+    initializeASTNodeStack(&nodes);
 
+    for (int i = 0; i < tokens->size; i++) {
+        // Get the token.
+        Token token = tokens->tokens[i];
+
+        ASTNode *node;
+
+        if (token.type == TOKEN_TYPE_OBJECT) {
+            initializeASTNode(&node, AST_NODE_TYPE_VAR);
+        } else if (token.type == TOKEN_TYPE_NUMBER || token.type == TOKEN_TYPE_STRING) {
+            initializeASTNode(&node, AST_NODE_TYPE_CONST);
+        } else if (token.type == TOKEN_TYPE_BINARY_OPERATOR) {
+            initializeASTNode(&node, AST_NODE_TYPE_OP);
+
+            // Pop the right and left operands.
+            ASTNode *right = popASTNode(nodes);
+            ASTNode *left = popASTNode(nodes);
+
+            // Push the operands to the operator node.
+            pushASTNode(node->child, left);
+            pushASTNode(node->child, right);
+        } else if (token.type == TOKEN_TYPE_UNARY_OPERATOR) {
+            initializeASTNode(&node, AST_NODE_TYPE_OP);
+
+            // Pop the operand.
+            ASTNode *operand = popASTNode(nodes);
+
+            // Push the operand to the operator node.
+            pushASTNode(node->child, operand);
+        } else {
+            continue;
+        }
+
+        // Push the token to the node.
+        pushToken(node->tokens, token);
+        // Push the node to the stack.
+        pushASTNode(nodes, node);
+    }
+
+    // Free the old tokens and nodes.
+    freeASTNodeStack(ast->child);
+    // Set the new tokens and nodes.
+    ast->child = nodes;
+
+    // Free the postfix token stack.
     freeTokenStack(tokens);
 }
 
