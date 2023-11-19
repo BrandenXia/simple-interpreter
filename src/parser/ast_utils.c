@@ -37,6 +37,8 @@ int getPrecedence(const char *op) {
         return 6;
     } else if (strcmp(op, "^") == 0) {
         return 7;
+    } else if (strcmp(op, "!") == 0) {
+        return 8;
     } else {
         return -1;
     }

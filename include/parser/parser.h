@@ -18,4 +18,10 @@ void parseProgram(ASTNode *ast);
  */
 void parseStatement(ASTNode *ast);
 
+/*
+ * Convert a token stack into a postfix token stack.
+ * This function will allocate memory for the dst, so the caller is responsible for freeing it.
+ */
+void shuntingYard(TokenStack **dst, TokenStack *tokens);
+
 #endif //SIMPLE_INTERPRETER_PARSER_H
