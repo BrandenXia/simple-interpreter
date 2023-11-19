@@ -20,10 +20,11 @@ void run(FILE *input, bool tokenFlag, bool astFlag, bool verboseFlag) {
     if (astFlag || verboseFlag) {
         printAST(root, 0);
     }
+
+    freeASTNode(root);
 }
 
 int main(int argc, char *argv[]) {
-    FILE *input;
     CLI *cli;
 
     parseArgs(&cli, argc, argv);
@@ -39,6 +40,8 @@ int main(int argc, char *argv[]) {
     }
 
     if (cli->mode == FILE_MODE) {
+        FILE *input;
+
         input = fopen(cli->file, "r");
 
         if (input == NULL) {

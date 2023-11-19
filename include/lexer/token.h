@@ -1,6 +1,18 @@
 #ifndef SIMPLE_INTERPRETER_TOKEN_H
 #define SIMPLE_INTERPRETER_TOKEN_H
 
+extern const char *UNARY_OPERATORS[];
+
+extern const char *BINARY_OPERATORS[];
+
+extern const char L_PARENS[];
+
+extern const char R_PARENS[];
+
+extern const char QUOTES[];
+
+extern const char ENDS[];
+
 /*
  * Token types:
  * - TOKEN_TYPE_OBJECT: object
@@ -73,17 +85,5 @@ Token popToken(TokenStack *stack);
  * Peek a token from the token stack.
  */
 Token peekToken(TokenStack *stack);
-
-extern const char *UNARY_OPERATORS[];
-
-extern const char *BINARY_OPERATORS[];
-
-extern const char L_PARENS[];
-
-extern const char R_PARENS[];
-
-extern const char QUOTES[];
-
-extern const char ENDS[];
 
 #endif //SIMPLE_INTERPRETER_TOKEN_H
