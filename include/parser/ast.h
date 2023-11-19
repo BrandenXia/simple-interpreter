@@ -3,6 +3,10 @@
 
 #include "lexer/token.h"
 
+struct ASTNode;
+
+struct ASTNodeStack;
+
 /*
  * AST node types:
  * - AST_NODE_TYPE_PROGRAM: program
@@ -23,17 +27,21 @@ typedef enum {
 /*
  * AST node:
  * - type: node type
- * - token: tokens
- * - token_count: number of tokens
+ * - tokens: tokens stack
  * - children: children nodes
  * - child_count: number of children nodes
  */
 typedef struct ASTNode {
     ASTNodeType type;
     TokenStack *tokens;
-    struct ASTNode **child;
-    int child_count;
+    struct ASTNodeStack *child;
 } ASTNode;
+
+typedef struct ASTNodeStack {
+    ASTNode **nodes;
+    int size;
+    int capacity;
+} ASTNodeStack;
 
 /*
  * Initialize an AST node.
@@ -46,8 +54,30 @@ void initializeASTNode(ASTNode **dst, ASTNodeType type);
 void freeASTNode(ASTNode *node);
 
 /*
- * Add a child node to the parent node.
+ * Initialize an ASTNodeStack.
  */
-void addASTNodeChild(ASTNode *parent, ASTNode *child);
+void initializeASTNodeStack(ASTNodeStack **dst);
+
+/*
+ * Free an ASTNodeStack.
+ */
+void freeASTNodeStack(ASTNodeStack *stack);
+
+/*
+ * Push an AST node to an ASTNodeStack.
+ */
+void pushASTNode(ASTNodeStack *stack, ASTNode *node);
+
+/*
+ * Pop an AST node from an ASTNodeStack.
+ * This function will return memory address of the popped node, remember to free it.
+ */
+ASTNode *popASTNode(ASTNodeStack *stack);
+
+/*
+ * Peek an AST node from an ASTNodeStack.
+ * This function will return memory address of the peeked node, do not free it because it's still in the stack.
+ */
+ASTNode *peekASTNode(ASTNodeStack *stack);
 
 #endif //SIMPLE_INTERPRETER_AST_H

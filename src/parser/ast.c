@@ -9,40 +9,64 @@ void initializeASTNode(ASTNode **dst, ASTNodeType type) {
     node = malloc(sizeof(ASTNode));
     node->type = type;
     initializeTokenStack(&node->tokens);
-    node->child = NULL;
-    node->child_count = 0;
+    initializeASTNodeStack(&node->child);
 
     *dst = node;
 }
 
 void freeASTNode(ASTNode *node) {
-    int i;
-
     // Free the tokens
     if (node->tokens != NULL) {
         freeTokenStack(node->tokens);
     }
 
-    for (i = 0; i < node->child_count; i++) {
-        freeASTNode(node->child[i]); // Free the child node
-    }
-
+    // Free the children
     if (node->child != NULL) {
-        free(node->child); // Free the child array
+        freeASTNodeStack(node->child);
     }
 
     free(node); // Free the node itself
 }
 
-void addASTNodeChild(ASTNode *parent, ASTNode *child) {
+void initializeASTNodeStack(ASTNodeStack **dst) {
+    ASTNodeStack *tmp;
+
+    tmp = malloc(sizeof(ASTNodeStack));
+    tmp->nodes = malloc(sizeof(ASTNode *));
+    tmp->size = 0;
+    tmp->capacity = 1;
+
+    *dst = tmp;
+}
+
+void freeASTNodeStack(ASTNodeStack *stack) {
+    for (int i = 0; i < stack->size; i++) {
+        freeASTNode(stack->nodes[i]);
+    }
+
+    free(stack->nodes);
+    free(stack);
+}
+
+void pushASTNode(ASTNodeStack *stack, ASTNode *node) {
     ASTNode **tmp;
 
-    parent->child_count++; // Increment the child count
-    tmp = realloc(parent->child, sizeof(ASTNode *) * parent->child_count); // Reallocate the child array
-    if (tmp == NULL) {
-        freeASTNode(parent);
-        exit(1);
+    if (stack->size == stack->capacity) {
+        stack->capacity *= 2;
+        tmp = realloc(stack->nodes, stack->capacity * sizeof(ASTNode *));
+        if (tmp == NULL) {
+            exit(1);
+        }
+        stack->nodes = tmp;
     }
-    parent->child = tmp; // Set the child array to the new array
-    parent->child[parent->child_count - 1] = child; // Add the child to the array
+
+    stack->nodes[stack->size++] = node;
+}
+
+ASTNode *popASTNode(ASTNodeStack *stack) {
+    return stack->nodes[--stack->size];
+}
+
+ASTNode *peekASTNode(ASTNodeStack *stack) {
+    return stack->nodes[stack->size - 1];
 }

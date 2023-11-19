@@ -64,9 +64,9 @@ void printAST(const ASTNode *root, int level) {
     printf("%s", stringifyTokenType(root->tokens->tokens[root->tokens->size - 1].type));
     printf(")");
 
-    for (int i = 0; i < root->child_count; i++) {
+    for (int i = 0; i < root->child->size; i++) {
         printf("\n");
-        printAST(root->child[i], level + 1);
+        printAST(root->child->nodes[i], level + 1);
     }
 
     // If it's the root node, print a newline at the end
