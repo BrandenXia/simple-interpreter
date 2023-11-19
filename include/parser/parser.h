@@ -6,7 +6,7 @@
 /*
  * Parse a token list into an AST.
  */
-void parse(ASTNode **dst, TokenList *tokens);
+void parse(ASTNode **dst, TokenStack *tokens);
 
 /*
  * Parse a program node.

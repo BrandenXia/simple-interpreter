@@ -1,17 +1,14 @@
-#include <stdlib.h>
 #include "parser/parser.h"
 #include "parser/ast_utils.h"
 
-void parse(ASTNode **dst, TokenList *tokens) {
+void parse(ASTNode **dst, TokenStack *tokens) {
     ASTNode *root;
 
     // Initialize the root node
     initializeASTNode(&root, AST_NODE_TYPE_PROGRAM);
 
     // Add all tokens to the root node
-    for (TokenNode *current = tokens->head; current != NULL; current = current->next) {
-        pushToken(root->tokens, current->token);
-    }
+    root->tokens = tokens;
 
     // Parse the program to statements
     parseProgram(root);

@@ -57,13 +57,13 @@ Token nextToken(FILE *input) {
     return token;
 }
 
-void tokenize(TokenList **dst, FILE *input) {
-    TokenList *tokens;
+void tokenize(TokenStack **dst, FILE *input) {
+    TokenStack *tokens;
     Token token;
     long length, current;
 
     // Initialize variables
-    initializeTokenList(&tokens);
+    initializeTokenStack(&tokens);
     fseek(input, 0, SEEK_END);
     length = ftell(input);
     fseek(input, 0, SEEK_SET);
@@ -73,7 +73,7 @@ void tokenize(TokenList **dst, FILE *input) {
     while (current < length) {
         token = nextToken(input);  // Get the next token
         if (token.value == NULL) continue;  // Skip if the token value is NULL
-        addToken(tokens, token);
+        pushToken(tokens, token);
         if (current == length - 1) break; // Exit if the end of the input is reached
         current = ftell(input);
     }

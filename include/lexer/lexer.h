@@ -13,6 +13,6 @@ Token nextToken(FILE *input);
  * Tokenize the input file and store the tokens in the token list.
  * This function allocates memory for the token list, so the caller is responsible for freeing it.
  */
-void tokenize(TokenList **dst, FILE *input);
+void tokenize(TokenStack **dst, FILE *input);
 
 #endif //SIMPLE_INTERPRETER_LEXER_H

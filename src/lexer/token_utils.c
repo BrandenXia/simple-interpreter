@@ -110,11 +110,11 @@ void printToken(const Token *token) {
     free(escapedValue);
 }
 
-void printTokens(const TokenList *tokens) {
-    printf("TokenList(%d) [\n", tokens->size);
-    for (TokenNode *current = tokens->head; current != NULL; current = current->next) {
+void printTokens(const TokenStack *tokens) {
+    printf("TokenStack(%d) [\n", tokens->size);
+    for (int i = 0; i < tokens->size; i++) {
         printf("\t");
-        printToken(&current->token);
+        printToken(&tokens->tokens[i]);
     }
     printf("]\n");
 }

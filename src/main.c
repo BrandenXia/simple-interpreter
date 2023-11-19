@@ -6,7 +6,7 @@
 #include "parser/ast_utils.h"
 
 void run(FILE *input, bool tokenFlag, bool astFlag, bool verboseFlag) {
-    TokenList *tokens;
+    TokenStack *tokens;
     ASTNode *root;
 
     tokenize(&tokens, input);

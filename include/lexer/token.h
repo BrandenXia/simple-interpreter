@@ -38,45 +38,6 @@ typedef struct {
 } Token;
 
 /*
- * Token node:
- * A linked list node for tokens.
- * - token: token
- * - next: next token node
- */
-typedef struct TokenNode {
-    Token token;
-    struct TokenNode *next;
-} TokenNode;
-
-/*
- * Token list:
- * A linked list for tokens.
- * - head: head of the token list
- * - tail: tail of the token list
- * - size: size of the token list
- */
-typedef struct {
-    TokenNode *head;
-    TokenNode *tail;
-    int size;
-} TokenList;
-
-/*
- * Initialize a token list.
- */
-void initializeTokenList(TokenList **dst);
-
-/*
- * Free a token list.
- */
-void freeTokenList(TokenList *list);
-
-/*
- * Add a token to the token list.
- */
-void addToken(TokenList *list, Token token);
-
-/*
  * Token stack:
  * - tokens: tokens
  * - size: size of the stack

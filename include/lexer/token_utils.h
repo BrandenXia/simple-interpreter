@@ -37,6 +37,6 @@ void printToken(const Token *token);
 /*
  * Print the given token list.
  */
-void printTokens(const TokenList *tokens);
+void printTokens(const TokenStack *tokens);
 
 #endif //SIMPLE_INTERPRETER_TOKEN_UTILS_H
