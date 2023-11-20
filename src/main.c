@@ -4,8 +4,9 @@
 #include "lexer/token_utils.h"
 #include "parser/parser.h"
 #include "parser/ast_utils.h"
+#include "runner/runner.h"
 
-void run(FILE *input, bool tokenFlag, bool astFlag, bool verboseFlag) {
+void run(FILE *input, bool tokenFlag, bool astFlag, bool verboseFlag, Scope *scope) {
     TokenStack *tokens;
     ASTNode *root;
 
@@ -21,11 +22,14 @@ void run(FILE *input, bool tokenFlag, bool astFlag, bool verboseFlag) {
         printAST(root, 0);
     }
 
+    runAST(root, scope);
+
     freeASTNode(root);
 }
 
 int main(int argc, char *argv[]) {
     CLI *cli;
+    Scope *scope;
 
     parseArgs(&cli, argc, argv);
 
@@ -39,6 +43,8 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
+    initScope(&scope);
+
     if (cli->mode == FILE_MODE) {
         FILE *input;
 
@@ -49,7 +55,7 @@ int main(int argc, char *argv[]) {
             return 1;
         }
 
-        run(input, cli->flags[TOKEN_FLAG], cli->flags[AST_FLAG], cli->flags[VERBOSE_FLAG]);
+        run(input, cli->flags[TOKEN_FLAG], cli->flags[AST_FLAG], cli->flags[VERBOSE_FLAG], scope);
     }
 
     char *line = NULL;
@@ -64,9 +70,11 @@ int main(int argc, char *argv[]) {
             if (strcmp(line, "exit\n") == 0) break;
 
             run(fmemopen(line, strlen(line), "r"), cli->flags[TOKEN_FLAG], cli->flags[AST_FLAG],
-                cli->flags[VERBOSE_FLAG]);
+                   cli->flags[VERBOSE_FLAG], scope);
 
             printf(">>> ");
         }
     }
+
+    freeScope(scope);
 }

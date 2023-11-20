@@ -17,4 +17,8 @@ add_executable(simple_interpreter
     src/parser/parser.c
     src/parser/ast_utils.c
     src/cli/cli.c
+    src/runner/var_hash_map.c
+    src/runner/evaluate.c
+    src/runner/operators.c
+    src/runner/runner.c
 )
