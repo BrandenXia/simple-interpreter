@@ -29,6 +29,11 @@ void initializeVarHashMap(VarHashMap **dst) {
     map->size = 0;
     map->capacity = VAR_HASH_MAP_INITIAL_CAPACITY;
 
+    // Initialize the variables
+    for (int i = 0; i < map->capacity; i++) {
+        map->vars[i].name = NULL;
+    }
+
     *dst = map;
 }
 
