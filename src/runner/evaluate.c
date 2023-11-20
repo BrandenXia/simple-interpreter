@@ -53,10 +53,16 @@ ReturnVal evaluateOP(ASTNode *ast, Scope *scope) {
             left = evaluate(ast->child->nodes[0], scope);
             right = evaluate(ast->child->nodes[1], scope);
 
+            if (right.type == VAR_TYPE_ERROR) {
+                val.type = VAR_TYPE_ERROR;
+                val.string = "Invalid right operand for binary operator";
+                break;
+            }
+
             if (strcmp(ast->tokens->tokens[0].value, "=") == 0) {
                 if (ast->child->nodes[0]->tokens->tokens[0].type != TOKEN_TYPE_OBJECT) {
                     val.type = VAR_TYPE_ERROR;
-                    val.string = "Invalid left operand for binary operator";
+                    val.string = "Invalid left operand for binary operator =";
                     break;
                 }
 
@@ -69,11 +75,7 @@ ReturnVal evaluateOP(ASTNode *ast, Scope *scope) {
                 break;
             }
 
-            if (right.type == VAR_TYPE_ERROR) {
-                val.type = VAR_TYPE_ERROR;
-                val.string = "Invalid right operand for binary operator";
-                break;
-            } else if (left.type == VAR_TYPE_ERROR) {
+            if (left.type == VAR_TYPE_ERROR) {
                 val.type = VAR_TYPE_ERROR;
                 val.string = "Invalid left operand for binary operator";
                 break;
