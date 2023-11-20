@@ -8,7 +8,7 @@ ReturnVal evaluateSTMT(ASTNode *ast, Scope *scope);
 
 ReturnVal evaluateVAR(ASTNode *ast, Scope *scope);
 
-inline ReturnVal evaluateCONST(ASTNode *ast);
+ReturnVal evaluateCONST(ASTNode *ast);
 
 ReturnVal evaluateOP(ASTNode *ast, Scope *scope);
 
