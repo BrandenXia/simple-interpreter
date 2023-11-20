@@ -12,7 +12,7 @@ void runAST(ASTNode *ast, Scope *scope) {
 
         switch (val.type) {
             case VAR_TYPE_NUMBER:
-                printf("%f\n", val.number);
+                printf("%g\n", val.number);
                 break;
             case VAR_TYPE_STRING:
                 printf("%s\n", val.string);
