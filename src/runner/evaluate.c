@@ -31,7 +31,8 @@ inline ReturnVal evaluateCONST(ASTNode *ast) {
             break;
         case TOKEN_TYPE_STRING:
             val.type = VAR_TYPE_STRING;
-            val.string = ast->tokens->tokens[0].value;
+            val.string = calloc(strlen(ast->tokens->tokens[0].value) - 1, sizeof(char));
+            val.string = strncpy(val.string, ast->tokens->tokens[0].value + 1, strlen(ast->tokens->tokens[0].value) - 2);
             break;
         default:
             val.type = VAR_TYPE_ERROR;
