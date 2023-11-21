@@ -3,7 +3,7 @@
 #include "lexer/lexer.h"
 #include "lexer/token_utils.h"
 
-Token nextToken(FILE *input) {
+Token nextToken(FILE *input, long length) {
     Token token;
     char *buffer;
     int buffer_size;
@@ -42,7 +42,7 @@ Token nextToken(FILE *input) {
 
         // Update the index and buffer size
         buffer_size++;
-    } while (token.type == getType(buffer));
+    } while (token.type == getType(buffer) && ftell(input) < length);
 
     // Assign buffer minus the last character to token value
     token.value = calloc(buffer_size - 1, sizeof(char));
@@ -50,6 +50,10 @@ Token nextToken(FILE *input) {
     strncpy(token.value, buffer, buffer_size - 2);
     // Go back one character
     fseek(input, -1, SEEK_CUR);
+
+    if (token.type == TOKEN_TYPE_STRING && (token.value[0] != token.value[buffer_size - 3] || strlen(token.value) < 2)) {
+        token.type = TOKEN_TYPE_UNKNOWN;
+    }
 
     // Free buffer
     free(buffer);
@@ -71,7 +75,7 @@ void tokenize(TokenStack **dst, FILE *input) {
 
     // Loop until the end of the input
     while (current < length) {
-        token = nextToken(input);  // Get the next token
+        token = nextToken(input, length);  // Get the next token
         if (token.value == NULL) continue;  // Skip if the token value is NULL
         pushToken(tokens, token);
         if (current == length - 1) break; // Exit if the end of the input is reached

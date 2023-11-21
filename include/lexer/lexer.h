@@ -7,7 +7,7 @@
 /*
  * Get the next token from the input string. The current position in the input string is passed as a pointer to an int.
  */
-Token nextToken(FILE *input);
+Token nextToken(FILE *input, long length);
 
 /*
  * Tokenize the input file and store the tokens in the token list.

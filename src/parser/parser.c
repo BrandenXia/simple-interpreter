@@ -125,6 +125,15 @@ void shuntingYard(TokenStack **dst, TokenStack *tokens) {
                 pushToken(objects, popToken(operators));
             }
             popToken(operators);
+        } else if (token.type == TOKEN_TYPE_UNKNOWN) {
+            freeTokenStack(objects);
+            freeTokenStack(operators);
+
+            TokenStack *tmp;
+            initializeTokenStack(&tmp);
+            *dst = tmp;
+
+            return;
         }
     }
 

@@ -59,7 +59,7 @@ void printAST(const ASTNode *root, int level) {
     for (int i = 0; i < root->tokens->size - 1; i++) {
         printf("%s ", stringifyTokenType(root->tokens->tokens[i].type));
     }
-    printf("%s", stringifyTokenType(root->tokens->tokens[root->tokens->size - 1].type));
+    if (root->tokens->size > 0) printf("%s", stringifyTokenType(root->tokens->tokens[root->tokens->size - 1].type));
     printf(")");
 
     for (int i = 0; i < root->child->size; i++) {

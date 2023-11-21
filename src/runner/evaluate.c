@@ -4,7 +4,14 @@
 #include "runner/operators.h"
 
 ReturnVal evaluateSTMT(ASTNode *ast, Scope *scope) {
-    return evaluate(ast->child->nodes[0], scope);
+    if (ast->child->size > 0) {
+        return evaluate(ast->child->nodes[0], scope);
+    } else {
+        ReturnVal ret;
+        ret.type = VAR_TYPE_ERROR;
+        ret.string = "Invalid statement";
+        return ret;
+    }
 }
 
 ReturnVal evaluateVAR(ASTNode *ast, Scope *scope) {
