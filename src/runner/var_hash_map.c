@@ -2,7 +2,7 @@
 #include <string.h>
 #include "runner/var_hash_map.h"
 
-unsigned int BKDRHash(const char *str) {
+inline unsigned int BKDRHash(const char *str) {
     unsigned int seed = 131;
     unsigned int hash = 0;
 
@@ -13,11 +13,11 @@ unsigned int BKDRHash(const char *str) {
     return (hash & 0x7FFFFFFF);
 }
 
-unsigned int hash(unsigned int hash) {
+inline unsigned int hash(unsigned int hash) {
     return hash ^ (hash >> 16);
 }
 
-unsigned int indexFor(unsigned int hash, unsigned int capacity) {
+inline unsigned int indexFor(unsigned int hash, unsigned int capacity) {
     return hash & (capacity - 1);
 }
 

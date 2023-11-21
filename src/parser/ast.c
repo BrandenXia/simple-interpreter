@@ -57,10 +57,10 @@ void pushASTNode(ASTNodeStack *stack, ASTNode *node) {
     stack->nodes[stack->size++] = node;
 }
 
-ASTNode *popASTNode(ASTNodeStack *stack) {
+inline ASTNode *popASTNode(ASTNodeStack *stack) {
     return stack->nodes[--stack->size];
 }
 
-ASTNode *peekASTNode(ASTNodeStack *stack) {
+inline ASTNode *peekASTNode(ASTNodeStack *stack) {
     return stack->nodes[stack->size - 1];
 }

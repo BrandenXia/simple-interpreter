@@ -44,11 +44,11 @@ int countChar(const char *str, const char c) {
     return count;
 }
 
-bool isAlpha(const char c) {
+inline bool isAlpha(const char c) {
     return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 }
 
-bool isDigit(const char c) {
+inline bool isDigit(const char c) {
     return c >= '0' && c <= '9';
 }
 

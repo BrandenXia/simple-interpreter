@@ -32,19 +32,19 @@ inline const char *stringifyTokenType(TokenType type) {
     }
 }
 
-bool isUnaryOperator(const char *c) {
+inline bool isUnaryOperator(const char *c) {
     return matchStringStart(c, UNARY_OPERATORS);
 }
 
-bool isBinaryOperator(const char *c) {
+inline bool isBinaryOperator(const char *c) {
     return matchStringStart(c, BINARY_OPERATORS);
 }
 
-bool isRightParen(const char *c) {
+inline bool isRightParen(const char *c) {
     return inArrayChar(R_PARENS, *c) && strlen(c) == 1;
 }
 
-bool isLeftParen(const char *c) {
+inline bool isLeftParen(const char *c) {
     return inArrayChar(L_PARENS, *c) && strlen(c) == 1;
 }
 
@@ -62,19 +62,19 @@ bool isString(const char *c) {
     return false;
 }
 
-bool isEnd(const char *c) {
+inline bool isEnd(const char *c) {
     return inArrayChar(ENDS, *c) && strlen(c) == 1;
 }
 
-bool isObject(const char *c) {
+inline bool isObject(const char *c) {
     return allChar(c, isAlpha);
 }
 
-bool isNumber(const char *c) {
+inline bool isNumber(const char *c) {
     return allChar(c, isDigit);
 }
 
-bool isBlank(const char *c) {
+inline bool isBlank(const char *c) {
     return isspace(*c);
 }
 
