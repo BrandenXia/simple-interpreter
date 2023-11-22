@@ -1,8 +1,29 @@
-### C template
-# Prerequisites
-*.d
+# Autotools
+/missing
+/depcomp
+/compile
+/configure
+/config.status
+/install-sh
+/Makefile.in
+/config.h.in
+/config.h
+/Makefile
+/stamp-h1
+/aclocal.m4
+/config.log
+/config.guess
+/config.sub
+autom4te.cache/
+simple_interpreter
+configure~
+/build
 
-# Object files
+# Compile
+.dirstamp/
+.dirstamp
+.deps
+.libs
 *.o
 *.ko
 *.obj
@@ -43,35 +64,9 @@
 *.idb
 *.pdb
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# Tests
+test.*
 
-### CMake template
-CMakeLists.txt.user
-CMakeCache.txt
-CMakeFiles
-cmake-build-debug
-cmake-build-release
-CMakeScripts
-Testing
-Makefile
-cmake_install.cmake
-install_manifest.txt
-compile_commands.json
-CTestTestfile.cmake
-_deps
-
-### Example user template template
-### Example user template
-
-# IntelliJ project files
-.idea
-*.iml
-out
-gen
+# IDE
+/.idea/.gitignore
+/.idea/vcs.xml
