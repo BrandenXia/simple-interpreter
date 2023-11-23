@@ -7,7 +7,7 @@ A simple interpreter for study purposes.
 If you use IDE, you can also use IDE's auto build system.
 
 ```shell
-cmake .
-make all
-./simple_interpreter
+autoreconf --install
+./configure
+make
 ```
