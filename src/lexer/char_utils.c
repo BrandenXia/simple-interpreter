@@ -94,7 +94,6 @@ void unescape(char **dst, const char *str) {
                 escape = true;
                 break;
             default:
-                escape_char = c;
                 break;
         }
 
