@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include "cli/cli.h"
 
-const char *VERSION = "0.1.0";
-
 void parseArgs(CLI **dst, int argc, char **argv) {
     CLI *cli;
     int opt;

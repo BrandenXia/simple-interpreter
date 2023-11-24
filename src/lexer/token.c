@@ -1,18 +1,6 @@
 #include <stdlib.h>
 #include "lexer/token.h"
 
-const char *UNARY_OPERATORS[] = {"!", ""};
-
-const char *BINARY_OPERATORS[] = {"+", "-", "*", "/", "^", "%", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", ""};
-
-const char L_PARENS[] = "({[";
-
-const char R_PARENS[] = ")}]";
-
-const char QUOTES[] = "\"'";
-
-const char ENDS[] = ";\n";
-
 void initializeTokenStack(TokenStack **dst) {
     TokenStack *stack;
 

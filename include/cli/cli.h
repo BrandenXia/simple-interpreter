@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-extern const char *VERSION;
+#define VERSION "0.1.0"
 
 typedef enum {
     FILE_MODE,

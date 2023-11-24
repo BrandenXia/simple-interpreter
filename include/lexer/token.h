@@ -1,17 +1,17 @@
 #ifndef SIMPLE_INTERPRETER_TOKEN_H
 #define SIMPLE_INTERPRETER_TOKEN_H
 
-extern const char *UNARY_OPERATORS[];
+#define UNARY_OPERATORS (const char *[]){"!", ""}
 
-extern const char *BINARY_OPERATORS[];
+#define BINARY_OPERATORS (const char *[]){"+", "-", "*", "/", "^", "%", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", ""}
 
-extern const char L_PARENS[];
+#define L_PARENS "({["
 
-extern const char R_PARENS[];
+#define R_PARENS ")}]"
 
-extern const char QUOTES[];
+#define QUOTES "\"'"
 
-extern const char ENDS[];
+#define ENDS ";\n"
 
 /*
  * Token types:
