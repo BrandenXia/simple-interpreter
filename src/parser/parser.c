@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "parser/parser.h"
 #include "parser/ast_utils.h"
 
@@ -70,6 +71,13 @@ void parseStatement(ASTNode *ast) {
             // Pop the right and left operands.
             ASTNode *right = popASTNode(nodes);
             ASTNode *left = popASTNode(nodes);
+
+            if (right == NULL || left == NULL) {
+                ASTNode *error;
+                initializeASTNode(&error, AST_NODE_TYPE_ERROR);
+                pushASTNode(nodes, error);
+                break;
+            }
 
             // Push the operands to the operator node.
             pushASTNode(node->child, left);

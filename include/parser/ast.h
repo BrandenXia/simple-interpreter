@@ -21,7 +21,8 @@ typedef enum {
     AST_NODE_TYPE_STMT,
     AST_NODE_TYPE_VAR,
     AST_NODE_TYPE_CONST,
-    AST_NODE_TYPE_OP
+    AST_NODE_TYPE_OP,
+    AST_NODE_TYPE_ERROR
 } ASTNodeType;
 
 /*

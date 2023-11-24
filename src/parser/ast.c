@@ -15,6 +15,8 @@ void initializeASTNode(ASTNode **dst, ASTNodeType type) {
 }
 
 void freeASTNode(ASTNode *node) {
+    if (node == NULL) return;
+
     // Free the tokens
     if (node->tokens != NULL) freeTokenStack(node->tokens);
 
@@ -58,6 +60,8 @@ void pushASTNode(ASTNodeStack *stack, ASTNode *node) {
 }
 
 inline ASTNode *popASTNode(ASTNodeStack *stack) {
+    if (stack->size <= 0) return NULL;
+
     return stack->nodes[--stack->size];
 }
 
