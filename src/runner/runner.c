@@ -17,6 +17,9 @@ void runAST(ASTNode *ast, Scope *scope) {
             case VAR_TYPE_STRING:
                 printf("%s\n", val.string);
                 break;
+            case VAR_TYPE_BOOL:
+                printf("%s\n", val.boolean ? "true" : "false");
+                break;
             case VAR_TYPE_ERROR:
                 printf("Error: %s\n", val.error);
                 break;

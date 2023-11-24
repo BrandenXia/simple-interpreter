@@ -55,9 +55,9 @@ VarData evalBinaryOp(const char *op, VarData lhs, VarData rhs) {
 VarData not(VarData operand) {
     VarData ret;
 
-    if (operand.type == VAR_TYPE_NUMBER) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = !operand.number;
+    if (operand.type == VAR_TYPE_BOOL) {
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = !operand.boolean;
     } else {
         ret.type = VAR_TYPE_ERROR;
         ret.error = ERROR_INVALID_OPERAND_NOT;
@@ -158,12 +158,12 @@ VarData modulo(VarData lhs, VarData rhs) {
 VarData equal(VarData lhs, VarData rhs) {
     VarData ret;
 
-    if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = lhs.number == rhs.number;
+    if ((lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) || (lhs.type == VAR_TYPE_BOOL && rhs.type == VAR_TYPE_BOOL)) {
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = lhs.number == rhs.number;
     } else if (lhs.type == VAR_TYPE_STRING && rhs.type == VAR_TYPE_STRING) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = strcmp(lhs.string, rhs.string) == 0;
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = strcmp(lhs.string, rhs.string) == 0;
     } else {
         ret.type = VAR_TYPE_ERROR;
         ret.error = ERROR_INVALID_OPERAND_EQUAL;
@@ -175,12 +175,12 @@ VarData equal(VarData lhs, VarData rhs) {
 VarData notEqual(VarData lhs, VarData rhs) {
     VarData ret;
 
-    if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = lhs.number != rhs.number;
+    if ((lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) || (lhs.type == VAR_TYPE_BOOL && rhs.type == VAR_TYPE_BOOL)) {
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = lhs.number != rhs.number;
     } else if (lhs.type == VAR_TYPE_STRING && rhs.type == VAR_TYPE_STRING) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = strcmp(lhs.string, rhs.string) != 0;
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = strcmp(lhs.string, rhs.string) != 0;
     } else {
         ret.type = VAR_TYPE_ERROR;
         ret.error = ERROR_INVALID_OPERAND_NOT_EQUAL;
@@ -192,12 +192,12 @@ VarData notEqual(VarData lhs, VarData rhs) {
 VarData greaterThan(VarData lhs, VarData rhs) {
     VarData ret;
 
-    if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = lhs.number > rhs.number;
+    if ((lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) || (lhs.type == VAR_TYPE_BOOL && rhs.type == VAR_TYPE_BOOL)) {
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = lhs.number > rhs.number;
     } else if (lhs.type == VAR_TYPE_STRING && rhs.type == VAR_TYPE_STRING) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = strcmp(lhs.string, rhs.string) > 0;
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = strcmp(lhs.string, rhs.string) > 0;
     } else {
         ret.type = VAR_TYPE_ERROR;
         ret.error = ERROR_INVALID_OPERAND_GREATER_THAN;
@@ -209,12 +209,12 @@ VarData greaterThan(VarData lhs, VarData rhs) {
 VarData lessThan(VarData lhs, VarData rhs) {
     VarData ret;
 
-    if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = lhs.number < rhs.number;
+    if ((lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) || (lhs.type == VAR_TYPE_BOOL && rhs.type == VAR_TYPE_BOOL)) {
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = lhs.number < rhs.number;
     } else if (lhs.type == VAR_TYPE_STRING && rhs.type == VAR_TYPE_STRING) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = strcmp(lhs.string, rhs.string) < 0;
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = strcmp(lhs.string, rhs.string) < 0;
     } else {
         ret.type = VAR_TYPE_ERROR;
         ret.error = ERROR_INVALID_OPERAND_LESS_THAN;
@@ -226,12 +226,12 @@ VarData lessThan(VarData lhs, VarData rhs) {
 VarData greaterThanOrEqual(VarData lhs, VarData rhs) {
     VarData ret;
 
-    if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = lhs.number >= rhs.number;
+    if ((lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) || (lhs.type == VAR_TYPE_BOOL && rhs.type == VAR_TYPE_BOOL)) {
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = lhs.number >= rhs.number;
     } else if (lhs.type == VAR_TYPE_STRING && rhs.type == VAR_TYPE_STRING) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = strcmp(lhs.string, rhs.string) >= 0;
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = strcmp(lhs.string, rhs.string) >= 0;
     } else {
         ret.type = VAR_TYPE_ERROR;
         ret.error = ERROR_INVALID_OPERAND_GREATER_THAN_OR_EQUAL;
@@ -243,12 +243,12 @@ VarData greaterThanOrEqual(VarData lhs, VarData rhs) {
 VarData lessThanOrEqual(VarData lhs, VarData rhs) {
     VarData ret;
 
-    if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = lhs.number <= rhs.number;
+    if ((lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) || (lhs.type == VAR_TYPE_BOOL && rhs.type == VAR_TYPE_BOOL)) {
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = lhs.number <= rhs.number;
     } else if (lhs.type == VAR_TYPE_STRING && rhs.type == VAR_TYPE_STRING) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = strcmp(lhs.string, rhs.string) <= 0;
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = strcmp(lhs.string, rhs.string) <= 0;
     } else {
         ret.type = VAR_TYPE_ERROR;
         ret.error = ERROR_INVALID_OPERAND_LESS_THAN_OR_EQUAL;
@@ -260,9 +260,9 @@ VarData lessThanOrEqual(VarData lhs, VarData rhs) {
 VarData and(VarData lhs, VarData rhs) {
     VarData ret;
 
-    if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = lhs.number && rhs.number;
+    if (lhs.type == VAR_TYPE_BOOL && rhs.type == VAR_TYPE_BOOL) {
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = lhs.boolean && rhs.boolean;
     } else {
         ret.type = VAR_TYPE_ERROR;
         ret.error = ERROR_INVALID_OPERAND_AND;
@@ -274,9 +274,9 @@ VarData and(VarData lhs, VarData rhs) {
 VarData or(VarData lhs, VarData rhs) {
     VarData ret;
 
-    if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
-        ret.type = VAR_TYPE_NUMBER;
-        ret.number = lhs.number || rhs.number;
+    if (lhs.type == VAR_TYPE_BOOL && rhs.type == VAR_TYPE_BOOL) {
+        ret.type = VAR_TYPE_BOOL;
+        ret.boolean = lhs.boolean || rhs.boolean;
     } else {
         ret.type = VAR_TYPE_ERROR;
         ret.error = ERROR_INVALID_OPERAND_OR;
