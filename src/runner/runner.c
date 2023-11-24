@@ -6,7 +6,7 @@ void runAST(ASTNode *ast, Scope *scope) {
     if (ast->type != AST_NODE_TYPE_PROGRAM) return;
 
     for (int i = 0; i < ast->child->size; i++) {
-        ReturnVal val;
+        VarData val;
 
         val = evaluate(ast->child->nodes[i], scope);
 

@@ -9,6 +9,4 @@ typedef VarHashMap Scope;
 
 #define freeScope(scope) freeVarHashMap(scope)
 
-typedef VarData ReturnVal;
-
 #endif //SIMPLE_INTERPRETER_RUNTIME_H

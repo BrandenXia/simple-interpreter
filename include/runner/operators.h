@@ -3,38 +3,38 @@
 
 #include "runner/runtime.h"
 
-ReturnVal evalUnaryOp(const char *op, ReturnVal operand);
+VarData evalUnaryOp(const char *op, VarData operand);
 
-ReturnVal evalBinaryOp(const char *op, ReturnVal lhs, ReturnVal rhs);
+VarData evalBinaryOp(const char *op, VarData lhs, VarData rhs);
 
-ReturnVal not(ReturnVal operand);
+VarData not(VarData operand);
 
-ReturnVal add(ReturnVal lhs, ReturnVal rhs);
+VarData add(VarData lhs, VarData rhs);
 
-ReturnVal subtract(ReturnVal lhs, ReturnVal rhs);
+VarData subtract(VarData lhs, VarData rhs);
 
-ReturnVal multiply(ReturnVal lhs, ReturnVal rhs);
+VarData multiply(VarData lhs, VarData rhs);
 
-ReturnVal divide(ReturnVal lhs, ReturnVal rhs);
+VarData divide(VarData lhs, VarData rhs);
 
-ReturnVal power(ReturnVal lhs, ReturnVal rhs);
+VarData power(VarData lhs, VarData rhs);
 
-ReturnVal modulo(ReturnVal lhs, ReturnVal rhs);
+VarData modulo(VarData lhs, VarData rhs);
 
-ReturnVal equal(ReturnVal lhs, ReturnVal rhs);
+VarData equal(VarData lhs, VarData rhs);
 
-ReturnVal notEqual(ReturnVal lhs, ReturnVal rhs);
+VarData notEqual(VarData lhs, VarData rhs);
 
-ReturnVal greaterThan(ReturnVal lhs, ReturnVal rhs);
+VarData greaterThan(VarData lhs, VarData rhs);
 
-ReturnVal lessThan(ReturnVal lhs, ReturnVal rhs);
+VarData lessThan(VarData lhs, VarData rhs);
 
-ReturnVal greaterThanOrEqual(ReturnVal lhs, ReturnVal rhs);
+VarData greaterThanOrEqual(VarData lhs, VarData rhs);
 
-ReturnVal lessThanOrEqual(ReturnVal lhs, ReturnVal rhs);
+VarData lessThanOrEqual(VarData lhs, VarData rhs);
 
-ReturnVal and(ReturnVal lhs, ReturnVal rhs);
+VarData and(VarData lhs, VarData rhs);
 
-ReturnVal or(ReturnVal lhs, ReturnVal rhs);
+VarData or(VarData lhs, VarData rhs);
 
 #endif //SIMPLE_INTERPRETER_OPERATORS_H

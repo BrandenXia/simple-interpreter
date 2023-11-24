@@ -9,23 +9,23 @@
     var = malloc(sizeof(format) + strlen(content) * sizeof(char) - 2 * sizeof(char)); \
     sprintf(var, format, content)
 
-ReturnVal evaluateSTMT(ASTNode *ast, Scope *scope) {
+VarData evaluateSTMT(ASTNode *ast, Scope *scope) {
     if (ast->child->size > 0) {
         return evaluate(ast->child->nodes[0], scope);
     }
 
-    ReturnVal ret;
+    VarData ret;
     ret.type = VAR_TYPE_ERROR;
     ret.error = ERROR_INVALID_STATEMENT;
     return ret;
 }
 
-ReturnVal evaluateVAR(ASTNode *ast, Scope *scope) {
+VarData evaluateVAR(ASTNode *ast, Scope *scope) {
     Var *val;
 
     val = getVar(scope, ast->tokens->tokens[0].value);
     if (val == NULL) {
-        ReturnVal ret;
+        VarData ret;
         ret.type = VAR_TYPE_ERROR;
         format_assign_message(ret.error, ERROR_VARIABLE_NOT_FOUND, ast->tokens->tokens[0].value);
         return ret;
@@ -34,8 +34,8 @@ ReturnVal evaluateVAR(ASTNode *ast, Scope *scope) {
     return val->data;
 }
 
-inline ReturnVal evaluateCONST(ASTNode *ast) {
-    ReturnVal val;
+inline VarData evaluateCONST(ASTNode *ast) {
+    VarData val;
 
     switch (ast->tokens->tokens[0].type) {
         case TOKEN_TYPE_NUMBER:
@@ -56,12 +56,12 @@ inline ReturnVal evaluateCONST(ASTNode *ast) {
     return val;
 }
 
-ReturnVal evaluateOP(ASTNode *ast, Scope *scope) {
-    ReturnVal val;
+VarData evaluateOP(ASTNode *ast, Scope *scope) {
+    VarData val;
 
     switch (ast->tokens->tokens[0].type) {
         case TOKEN_TYPE_BINARY_OPERATOR: {
-            ReturnVal left, right;
+            VarData left, right;
 
             left = evaluate(ast->child->nodes[0], scope);
             right = evaluate(ast->child->nodes[1], scope);
@@ -99,7 +99,7 @@ ReturnVal evaluateOP(ASTNode *ast, Scope *scope) {
             break;
         }
         case TOKEN_TYPE_UNARY_OPERATOR: {
-            ReturnVal operand;
+            VarData operand;
 
             operand = evaluate(ast->child->nodes[0], scope);
 
@@ -122,7 +122,7 @@ ReturnVal evaluateOP(ASTNode *ast, Scope *scope) {
     return val;
 }
 
-ReturnVal evaluate(ASTNode *ast, Scope *scope) {
+VarData evaluate(ASTNode *ast, Scope *scope) {
     switch (ast->type) {
         case AST_NODE_TYPE_STMT:
             return evaluateSTMT(ast, scope);
@@ -133,7 +133,7 @@ ReturnVal evaluate(ASTNode *ast, Scope *scope) {
         case AST_NODE_TYPE_OP:
             return evaluateOP(ast, scope);
         default: {
-            ReturnVal ret;
+            VarData ret;
             ret.type = VAR_TYPE_ERROR;
             ret.error = ERROR_INVALID_AST_NODE;
             return ret;

@@ -4,18 +4,18 @@
 #include "parser/ast.h"
 #include "runner/runtime.h"
 
-ReturnVal evaluateSTMT(ASTNode *ast, Scope *scope);
+VarData evaluateSTMT(ASTNode *ast, Scope *scope);
 
-ReturnVal evaluateVAR(ASTNode *ast, Scope *scope);
+VarData evaluateVAR(ASTNode *ast, Scope *scope);
 
-ReturnVal evaluateCONST(ASTNode *ast);
+VarData evaluateCONST(ASTNode *ast);
 
-ReturnVal evaluateOP(ASTNode *ast, Scope *scope);
+VarData evaluateOP(ASTNode *ast, Scope *scope);
 
 /*
  * Evaluate the given AST.
  */
-ReturnVal evaluate(ASTNode *ast, Scope *scope);
+VarData evaluate(ASTNode *ast, Scope *scope);
 
 
 #endif //SIMPLE_INTERPRETER_EVALUATE_H

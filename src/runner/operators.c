@@ -4,18 +4,18 @@
 #include "runner/message.h"
 #include "runner/operators.h"
 
-ReturnVal evalUnaryOp(const char *op, ReturnVal operand) {
+VarData evalUnaryOp(const char *op, VarData operand) {
     if (strcmp(op, "!") == 0) {
         return not(operand);
     }
 
-    ReturnVal ret;
+    VarData ret;
     ret.type = VAR_TYPE_ERROR;
     ret.string = ERROR_INVALID_UNARY_OPERATOR;
     return ret;
 }
 
-ReturnVal evalBinaryOp(const char *op, ReturnVal lhs, ReturnVal rhs) {
+VarData evalBinaryOp(const char *op, VarData lhs, VarData rhs) {
     if (strcmp(op, "+") == 0) {
         return add(lhs, rhs);
     } else if (strcmp(op, "-") == 0) {
@@ -46,14 +46,14 @@ ReturnVal evalBinaryOp(const char *op, ReturnVal lhs, ReturnVal rhs) {
         return or(lhs, rhs);
     }
 
-    ReturnVal ret;
+    VarData ret;
     ret.type = VAR_TYPE_ERROR;
     ret.string = ERROR_INVALID_BINARY_OPERATOR;
     return ret;
 }
 
-ReturnVal not(ReturnVal operand) {
-    ReturnVal ret;
+VarData not(VarData operand) {
+    VarData ret;
 
     if (operand.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -66,8 +66,8 @@ ReturnVal not(ReturnVal operand) {
     return ret;
 }
 
-ReturnVal add(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData add(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -85,8 +85,8 @@ ReturnVal add(ReturnVal lhs, ReturnVal rhs) {
     return ret;
 }
 
-ReturnVal subtract(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData subtract(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -99,8 +99,8 @@ ReturnVal subtract(ReturnVal lhs, ReturnVal rhs) {
     return ret;
 }
 
-ReturnVal multiply(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData multiply(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -113,8 +113,8 @@ ReturnVal multiply(ReturnVal lhs, ReturnVal rhs) {
     return ret;
 }
 
-ReturnVal divide(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData divide(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -127,8 +127,8 @@ ReturnVal divide(ReturnVal lhs, ReturnVal rhs) {
     return ret;
 }
 
-ReturnVal power(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData power(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -141,8 +141,8 @@ ReturnVal power(ReturnVal lhs, ReturnVal rhs) {
     return ret;
 }
 
-ReturnVal modulo(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData modulo(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -155,8 +155,8 @@ ReturnVal modulo(ReturnVal lhs, ReturnVal rhs) {
     return ret;
 }
 
-ReturnVal equal(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData equal(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -172,8 +172,8 @@ ReturnVal equal(ReturnVal lhs, ReturnVal rhs) {
     return ret;
 }
 
-ReturnVal notEqual(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData notEqual(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -189,8 +189,8 @@ ReturnVal notEqual(ReturnVal lhs, ReturnVal rhs) {
     return ret;
 }
 
-ReturnVal greaterThan(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData greaterThan(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -206,8 +206,8 @@ ReturnVal greaterThan(ReturnVal lhs, ReturnVal rhs) {
     return ret;
 }
 
-ReturnVal lessThan(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData lessThan(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -223,8 +223,8 @@ ReturnVal lessThan(ReturnVal lhs, ReturnVal rhs) {
     return ret;
 }
 
-ReturnVal greaterThanOrEqual(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData greaterThanOrEqual(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -240,8 +240,8 @@ ReturnVal greaterThanOrEqual(ReturnVal lhs, ReturnVal rhs) {
     return ret;
 }
 
-ReturnVal lessThanOrEqual(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData lessThanOrEqual(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -257,8 +257,8 @@ ReturnVal lessThanOrEqual(ReturnVal lhs, ReturnVal rhs) {
     return ret;
 }
 
-ReturnVal and(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData and(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
@@ -271,8 +271,8 @@ ReturnVal and(ReturnVal lhs, ReturnVal rhs) {
     return ret;
 }
 
-ReturnVal or(ReturnVal lhs, ReturnVal rhs) {
-    ReturnVal ret;
+VarData or(VarData lhs, VarData rhs) {
+    VarData ret;
 
     if (lhs.type == VAR_TYPE_NUMBER && rhs.type == VAR_TYPE_NUMBER) {
         ret.type = VAR_TYPE_NUMBER;
