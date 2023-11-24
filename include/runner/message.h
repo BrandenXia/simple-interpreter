@@ -1,0 +1,30 @@
+#ifndef SIMPLE_INTERPRETER_MESSAGE_H
+#define SIMPLE_INTERPRETER_MESSAGE_H
+
+#define ERROR_INVALID_STATEMENT "Invalid statement"
+#define ERROR_VARIABLE_NOT_FOUND "Variable not found"
+#define ERROR_INVALID_CONSTANT_TYPE "Invalid constant type"
+#define ERROR_INVALID_RIGHT_OPERAND "Invalid right operand"
+#define ERROR_INVALID_LEFT_OPERAND "Invalid left operand"
+#define ERROR_INVALID_OPERAND "Invalid operand"
+#define ERROR_INVALID_OPERATOR "Invalid operator"
+#define ERROR_INVALID_AST_NODE "Invalid AST node"
+#define ERROR_INVALID_UNARY_OPERATOR "Invalid unary operator"
+#define ERROR_INVALID_BINARY_OPERATOR "Invalid binary operator"
+#define ERROR_INVALID_OPERAND_NOT "Invalid operand type for \"!\" operator"
+#define ERROR_INVALID_OPERAND_PLUS "Invalid operand type for \"+\" operator"
+#define ERROR_INVALID_OPERAND_MINUS "Invalid operand type for \"-\" operator"
+#define ERROR_INVALID_OPERAND_MULTIPLY "Invalid operand type for \"*\" operator"
+#define ERROR_INVALID_OPERAND_DIVIDE "Invalid operand type for \"/\" operator"
+#define ERROR_INVALID_OPERAND_POWER "Invalid operand type for \"^\" operator"
+#define ERROR_INVALID_OPERAND_MODULO "Invalid operand type for \"%\" operator"
+#define ERROR_INVALID_OPERAND_EQUAL "Invalid operand type for \"==\" operator"
+#define ERROR_INVALID_OPERAND_NOT_EQUAL "Invalid operand type for \"!=\" operator"
+#define ERROR_INVALID_OPERAND_GREATER_THAN "Invalid operand type for \">\" operator"
+#define ERROR_INVALID_OPERAND_LESS_THAN "Invalid operand type for \"<\" operator"
+#define ERROR_INVALID_OPERAND_GREATER_THAN_OR_EQUAL "Invalid operand type for \">=\" operator"
+#define ERROR_INVALID_OPERAND_LESS_THAN_OR_EQUAL "Invalid operand type for \"<=\" operator"
+#define ERROR_INVALID_OPERAND_AND "Invalid operand type for \"&&\" operator"
+#define ERROR_INVALID_OPERAND_OR "Invalid operand type for \"||\" operator"
+
+#endif //SIMPLE_INTERPRETER_MESSAGE_H

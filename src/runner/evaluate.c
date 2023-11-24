@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "runner/evaluate.h"
+#include "runner/message.h"
 #include "runner/operators.h"
 
 ReturnVal evaluateSTMT(ASTNode *ast, Scope *scope) {
@@ -9,7 +10,7 @@ ReturnVal evaluateSTMT(ASTNode *ast, Scope *scope) {
     } else {
         ReturnVal ret;
         ret.type = VAR_TYPE_ERROR;
-        ret.error = "Invalid statement";
+        ret.error = ERROR_INVALID_STATEMENT;
         return ret;
     }
 }
@@ -21,7 +22,7 @@ ReturnVal evaluateVAR(ASTNode *ast, Scope *scope) {
     if (val == NULL) {
         ReturnVal ret;
         ret.type = VAR_TYPE_ERROR;
-        ret.error = "Variable not found";
+        ret.error = ERROR_VARIABLE_NOT_FOUND;
         return ret;
     }
 
@@ -43,7 +44,7 @@ inline ReturnVal evaluateCONST(ASTNode *ast) {
             break;
         default:
             val.type = VAR_TYPE_ERROR;
-            val.error = "Invalid constant type";
+            val.error = ERROR_INVALID_CONSTANT_TYPE;
             break;
     }
 
@@ -62,14 +63,14 @@ ReturnVal evaluateOP(ASTNode *ast, Scope *scope) {
 
             if (right.type == VAR_TYPE_ERROR) {
                 val.type = VAR_TYPE_ERROR;
-                val.error = "Invalid right operand for binary operator";
+                val.error = ERROR_INVALID_RIGHT_OPERAND;
                 break;
             }
 
             if (strcmp(ast->tokens->tokens[0].value, "=") == 0) {
                 if (ast->child->nodes[0]->tokens->tokens[0].type != TOKEN_TYPE_OBJECT) {
                     val.type = VAR_TYPE_ERROR;
-                    val.error = "Invalid left operand for binary operator =";
+                    val.error = ERROR_INVALID_LEFT_OPERAND;
                     break;
                 }
 
@@ -84,7 +85,7 @@ ReturnVal evaluateOP(ASTNode *ast, Scope *scope) {
 
             if (left.type == VAR_TYPE_ERROR) {
                 val.type = VAR_TYPE_ERROR;
-                val.error = "Invalid left operand for binary operator";
+                val.error = ERROR_INVALID_LEFT_OPERAND;
                 break;
             }
 
@@ -99,7 +100,7 @@ ReturnVal evaluateOP(ASTNode *ast, Scope *scope) {
 
             if (operand.type == VAR_TYPE_ERROR) {
                 val.type = VAR_TYPE_ERROR;
-                val.error = "Invalid operand for unary operator";
+                val.error = ERROR_INVALID_OPERAND;
                 break;
             }
 
@@ -109,7 +110,7 @@ ReturnVal evaluateOP(ASTNode *ast, Scope *scope) {
         }
         default:
             val.type = VAR_TYPE_ERROR;
-            val.error = "Invalid operator type";
+            val.error = ERROR_INVALID_OPERATOR;
             break;
     }
 
@@ -129,7 +130,7 @@ ReturnVal evaluate(ASTNode *ast, Scope *scope) {
         default: {
             ReturnVal ret;
             ret.type = VAR_TYPE_ERROR;
-            ret.error = "Invalid AST node type";
+            ret.error = ERROR_INVALID_AST_NODE;
             return ret;
         }
     }
