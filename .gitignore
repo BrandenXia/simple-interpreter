@@ -68,5 +68,4 @@ configure~
 test.*
 
 # IDE
-/.idea/.gitignore
-/.idea/vcs.xml
+/.idea
