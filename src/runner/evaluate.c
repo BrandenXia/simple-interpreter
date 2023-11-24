@@ -1,18 +1,23 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "runner/evaluate.h"
 #include "runner/message.h"
 #include "runner/operators.h"
 
+#define format_assign_message(var, format, content) \
+    var = malloc(sizeof(format) + strlen(content) * sizeof(char) - 2 * sizeof(char)); \
+    sprintf(var, format, content)
+
 ReturnVal evaluateSTMT(ASTNode *ast, Scope *scope) {
     if (ast->child->size > 0) {
         return evaluate(ast->child->nodes[0], scope);
-    } else {
-        ReturnVal ret;
-        ret.type = VAR_TYPE_ERROR;
-        ret.error = ERROR_INVALID_STATEMENT;
-        return ret;
     }
+
+    ReturnVal ret;
+    ret.type = VAR_TYPE_ERROR;
+    ret.error = ERROR_INVALID_STATEMENT;
+    return ret;
 }
 
 ReturnVal evaluateVAR(ASTNode *ast, Scope *scope) {
@@ -22,7 +27,7 @@ ReturnVal evaluateVAR(ASTNode *ast, Scope *scope) {
     if (val == NULL) {
         ReturnVal ret;
         ret.type = VAR_TYPE_ERROR;
-        ret.error = ERROR_VARIABLE_NOT_FOUND;
+        format_assign_message(ret.error, ERROR_VARIABLE_NOT_FOUND, ast->tokens->tokens[0].value);
         return ret;
     }
 
@@ -63,14 +68,14 @@ ReturnVal evaluateOP(ASTNode *ast, Scope *scope) {
 
             if (right.type == VAR_TYPE_ERROR) {
                 val.type = VAR_TYPE_ERROR;
-                val.error = ERROR_INVALID_RIGHT_OPERAND;
+                format_assign_message(val.error, ERROR_INVALID_RIGHT_OPERAND, right.error);
                 break;
             }
 
             if (strcmp(ast->tokens->tokens[0].value, "=") == 0) {
                 if (ast->child->nodes[0]->tokens->tokens[0].type != TOKEN_TYPE_OBJECT) {
                     val.type = VAR_TYPE_ERROR;
-                    val.error = ERROR_INVALID_LEFT_OPERAND;
+                    format_assign_message(val.error, ERROR_INVALID_LEFT_OPERAND, ast->child->nodes[0]->tokens->tokens[0].value);
                     break;
                 }
 
@@ -85,7 +90,7 @@ ReturnVal evaluateOP(ASTNode *ast, Scope *scope) {
 
             if (left.type == VAR_TYPE_ERROR) {
                 val.type = VAR_TYPE_ERROR;
-                val.error = ERROR_INVALID_LEFT_OPERAND;
+                format_assign_message(val.error, ERROR_INVALID_LEFT_OPERAND, left.error);
                 break;
             }
 
@@ -100,7 +105,7 @@ ReturnVal evaluateOP(ASTNode *ast, Scope *scope) {
 
             if (operand.type == VAR_TYPE_ERROR) {
                 val.type = VAR_TYPE_ERROR;
-                val.error = ERROR_INVALID_OPERAND;
+                format_assign_message(val.error, ERROR_INVALID_OPERAND, operand.error);
                 break;
             }
 

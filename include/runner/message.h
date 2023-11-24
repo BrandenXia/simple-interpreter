@@ -2,11 +2,11 @@
 #define SIMPLE_INTERPRETER_MESSAGE_H
 
 #define ERROR_INVALID_STATEMENT "Invalid statement"
-#define ERROR_VARIABLE_NOT_FOUND "Variable not found"
+#define ERROR_VARIABLE_NOT_FOUND "Variable not found: %s"
 #define ERROR_INVALID_CONSTANT_TYPE "Invalid constant type"
-#define ERROR_INVALID_RIGHT_OPERAND "Invalid right operand"
-#define ERROR_INVALID_LEFT_OPERAND "Invalid left operand"
-#define ERROR_INVALID_OPERAND "Invalid operand"
+#define ERROR_INVALID_RIGHT_OPERAND "Invalid right operand: %s"
+#define ERROR_INVALID_LEFT_OPERAND "Invalid left operand: %s"
+#define ERROR_INVALID_OPERAND "Invalid operand: %s"
 #define ERROR_INVALID_OPERATOR "Invalid operator"
 #define ERROR_INVALID_AST_NODE "Invalid AST node"
 #define ERROR_INVALID_UNARY_OPERATOR "Invalid unary operator"
