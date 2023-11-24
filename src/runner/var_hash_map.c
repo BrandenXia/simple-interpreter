@@ -51,6 +51,7 @@ void insertVar(VarHashMap *map, Var var) {
     unsigned int h;
     unsigned int index;
 
+    // Check if the map needs to be resized
     if (map->size > map->capacity * 0.75) {
         map->capacity *= 2;
         Var *newVars = malloc(sizeof(Var) * map->capacity);
@@ -69,10 +70,11 @@ void insertVar(VarHashMap *map, Var var) {
     h = hash(BKDRHash(var.name));
     index = indexFor(h, map->capacity);
 
+    // Check if the variable is already in the map
+    if (!(map->vars[index].name != NULL && strcmp(map->vars[index].name, var.name) == 0))
+        map->size++;
     map->vars[index] = var;
-    map->size++;
 }
-
 
 Var *getVar(VarHashMap *map, const char *name) {
     unsigned int h = hash(BKDRHash(name));
