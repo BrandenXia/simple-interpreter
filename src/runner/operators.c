@@ -59,7 +59,7 @@ ReturnVal not(ReturnVal operand) {
         ret.number = !operand.number;
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand type for unary operator !";
+        ret.error = "Invalid operand type for unary operator !";
     }
 
     return ret;
@@ -78,7 +78,7 @@ ReturnVal add(ReturnVal lhs, ReturnVal rhs) {
         strcat(ret.string, rhs.string);
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator +";
+        ret.error = "Invalid operand types for binary operator +";
     }
 
     return ret;
@@ -92,7 +92,7 @@ ReturnVal subtract(ReturnVal lhs, ReturnVal rhs) {
         ret.number = lhs.number - rhs.number;
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator -";
+        ret.error = "Invalid operand types for binary operator -";
     }
 
     return ret;
@@ -106,7 +106,7 @@ ReturnVal multiply(ReturnVal lhs, ReturnVal rhs) {
         ret.number = lhs.number * rhs.number;
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator *";
+        ret.error = "Invalid operand types for binary operator *";
     }
 
     return ret;
@@ -120,7 +120,7 @@ ReturnVal divide(ReturnVal lhs, ReturnVal rhs) {
         ret.number = lhs.number / rhs.number;
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator /";
+        ret.error = "Invalid operand types for binary operator /";
     }
 
     return ret;
@@ -134,7 +134,7 @@ ReturnVal power(ReturnVal lhs, ReturnVal rhs) {
         ret.number = pow(lhs.number, rhs.number);
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator ^";
+        ret.error = "Invalid operand types for binary operator ^";
     }
 
     return ret;
@@ -148,7 +148,7 @@ ReturnVal modulo(ReturnVal lhs, ReturnVal rhs) {
         ret.number = fmod(lhs.number, rhs.number);
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator %";
+        ret.error = "Invalid operand types for binary operator %";
     }
 
     return ret;
@@ -165,7 +165,7 @@ ReturnVal equal(ReturnVal lhs, ReturnVal rhs) {
         ret.number = strcmp(lhs.string, rhs.string) == 0;
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator ==";
+        ret.error = "Invalid operand types for binary operator ==";
     }
 
     return ret;
@@ -182,7 +182,7 @@ ReturnVal notEqual(ReturnVal lhs, ReturnVal rhs) {
         ret.number = strcmp(lhs.string, rhs.string) != 0;
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator !=";
+        ret.error = "Invalid operand types for binary operator !=";
     }
 
     return ret;
@@ -199,7 +199,7 @@ ReturnVal greaterThan(ReturnVal lhs, ReturnVal rhs) {
         ret.number = strcmp(lhs.string, rhs.string) > 0;
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator >";
+        ret.error = "Invalid operand types for binary operator >";
     }
 
     return ret;
@@ -216,7 +216,7 @@ ReturnVal lessThan(ReturnVal lhs, ReturnVal rhs) {
         ret.number = strcmp(lhs.string, rhs.string) < 0;
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator <";
+        ret.error = "Invalid operand types for binary operator <";
     }
 
     return ret;
@@ -233,7 +233,7 @@ ReturnVal greaterThanOrEqual(ReturnVal lhs, ReturnVal rhs) {
         ret.number = strcmp(lhs.string, rhs.string) >= 0;
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator >=";
+        ret.error = "Invalid operand types for binary operator >=";
     }
 
     return ret;
@@ -250,7 +250,7 @@ ReturnVal lessThanOrEqual(ReturnVal lhs, ReturnVal rhs) {
         ret.number = strcmp(lhs.string, rhs.string) <= 0;
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator <=";
+        ret.error = "Invalid operand types for binary operator <=";
     }
 
     return ret;
@@ -264,7 +264,7 @@ ReturnVal and(ReturnVal lhs, ReturnVal rhs) {
         ret.number = lhs.number && rhs.number;
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator &&";
+        ret.error = "Invalid operand types for binary operator &&";
     }
 
     return ret;
@@ -278,7 +278,7 @@ ReturnVal or(ReturnVal lhs, ReturnVal rhs) {
         ret.number = lhs.number || rhs.number;
     } else {
         ret.type = VAR_TYPE_ERROR;
-        ret.string = "Invalid operand types for binary operator ||";
+        ret.error = "Invalid operand types for binary operator ||";
     }
 
     return ret;

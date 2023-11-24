@@ -13,6 +13,7 @@ typedef struct {
     union {
         double number;
         char *string;
+        char *error;
     };
 } VarData;
 

@@ -18,7 +18,7 @@ void runAST(ASTNode *ast, Scope *scope) {
                 printf("%s\n", val.string);
                 break;
             case VAR_TYPE_ERROR:
-                printf("Error: %s\n", val.string);
+                printf("Error: %s\n", val.error);
                 break;
             default:
                 break;
