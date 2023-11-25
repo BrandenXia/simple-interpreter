@@ -44,14 +44,6 @@ int countChar(const char *str, const char c) {
     return count;
 }
 
-inline bool isAlpha(const char c) {
-    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
-}
-
-inline bool isDigit(const char c) {
-    return c >= '0' && c <= '9';
-}
-
 void unescape(char **dst, const char *str) {
     if (str == NULL) return;
 

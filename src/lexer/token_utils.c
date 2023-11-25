@@ -67,11 +67,11 @@ inline bool isEnd(const char *c) {
 }
 
 inline bool isObject(const char *c) {
-    return allChar(c, isAlpha);
+    return allChar(c, (bool (*)(char)) isalpha);
 }
 
 inline bool isNumber(const char *c) {
-    return allChar(c, isDigit);
+    return allChar(c, (bool (*)(char)) isdigit);
 }
 
 inline bool isBlank(const char *c) {
