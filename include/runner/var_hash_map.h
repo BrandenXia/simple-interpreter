@@ -11,12 +11,6 @@ typedef struct {
     int capacity;
 } VarHashMap;
 
-unsigned int BKDRHash(const char *str);
-
-unsigned int hash(unsigned int hash);
-
-unsigned int indexFor(unsigned int hash, unsigned int capacity);
-
 void initializeVarHashMap(VarHashMap **dst);
 
 void freeVarHashMap(VarHashMap *map);

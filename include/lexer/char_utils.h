@@ -24,16 +24,6 @@ bool matchStringStart(const char *str, const char *match[]);
 int countChar(const char *str, char c);
 
 /*
- * Check if a character is a letter.
- */
-bool isAlpha(char c);
-
-/*
- * Check if a character is a digit.
- */
-bool isDigit(char c);
-
-/*
  * Return a string without escape characters.
  * This function allocates memory for the new string. The caller is responsible for freeing it.
  */
