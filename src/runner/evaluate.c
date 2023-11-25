@@ -21,7 +21,7 @@ VarData evaluateSTMT(ASTNode *ast, Scope *scope) {
 }
 
 VarData evaluateVAR(ASTNode *ast, Scope *scope) {
-    Var *val;
+    VarData *val;
 
     val = getVar(scope, ast->tokens->tokens[0].value);
     if (val == NULL) {
@@ -31,7 +31,7 @@ VarData evaluateVAR(ASTNode *ast, Scope *scope) {
         return ret;
     }
 
-    return val->data;
+    return *val;
 }
 
 inline VarData evaluateCONST(ASTNode *ast) {
@@ -79,10 +79,7 @@ VarData evaluateOP(ASTNode *ast, Scope *scope) {
                     break;
                 }
 
-                Var var;
-                var.name = ast->child->nodes[0]->tokens->tokens[0].value;
-                var.data = right;
-                insertVar(scope, var);
+                insertVar(scope, ast->child->nodes[0]->tokens->tokens[0].value, right);
 
                 val.type = VAR_TYPE_VOID;
                 break;

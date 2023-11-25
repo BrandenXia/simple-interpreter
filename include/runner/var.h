@@ -21,9 +21,4 @@ typedef struct {
     };
 } VarData;
 
-typedef struct {
-    char *name;
-    VarData data;
-} Var;
-
 #endif //SIMPLE_INTERPRETER_VAR_H
